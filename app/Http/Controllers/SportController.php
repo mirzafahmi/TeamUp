@@ -40,7 +40,7 @@ class SportController extends Controller
 
     public function edit(Request $request, Sport $sport)
     {
-        return view('admin.sports.edit', compact('sport'))
+        return view('admin.sports.edit', compact('sport'));
     }
 
     public function update(Request $request, Sport $sport)

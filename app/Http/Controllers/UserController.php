@@ -4,22 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
     public function show(User $user)
     {
-        return view('user.show', compact('user'));
+        if (auth()->check() && auth()->user()->id == $user->id) {
+            return redirect()->route('profile');
+        }
+
+        return view('users.show', compact('user'));
     }
 
     public function profile()
     {
-        return $this->show(auth()->user());
+        $user = auth()->user();
+
+        return view('users.show', compact('user'));
     }
 
     public function edit(User $user)
     {
-        return view('user.edit', compact('user'));
+        return view('users.edit', compact('user'));
     }
 
     public function update(User $user)

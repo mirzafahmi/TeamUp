@@ -13,12 +13,13 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        Category::factory()->create([
-            'name' => 'esports'
-        ]);
+        $categories = ['esports', 'sports'];
 
-        Category::factory()->create([
-            'name' => 'sports'
-        ]);
+        foreach ($categories as $category)
+        {
+            Category::factory()->create([
+                'name' => $category
+            ]);
+        }
     }
 }

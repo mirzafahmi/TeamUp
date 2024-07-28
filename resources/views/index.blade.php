@@ -1,31 +1,16 @@
-@extends('layout.desktop')
+@extends('layout.dashboard')
 
-@section('content')
-
-@auth()    
-    <div class="row py-3">
-        <div class="col-3">
-            @include('partial.breadcrumbs')
-        </div>
-        <div class="col-6">
-            @include('feed.shared.submit-feed')
-        </div>
-        <div class="col-3">
-            @include('partial.search-bar')
-        </div>
+@section('middle-content')
+    @auth()
+        @include('feeds.create')
+        <hr>
+    @endauth()
+    <div class="my-3">
+        @foreach($feeds as $feed)
+            @include('feeds.shared.feed-card')
+        @endforeach 
     </div>
-@endauth
-@guest()
-<div class="row py-3">
-        <div class="col-3">
-            @include('partial.breadcrumbs')
-        </div>
-        <div class="col-6">
-            <h1>guest</h1>
-        </div>
-        <div class="col-3">
-            @include('partial.search-bar')
-        </div>
+    <div class="mt-3">
+        {{ $feeds->withQueryString()->links() }}
     </div>
-@endguest
 @endsection

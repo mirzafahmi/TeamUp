@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
                 PlayLevelSeeder::class,
                 PlayModeSeeder::class,
                 PlayRoleSeeder::class,
+                FeedSeeder::class,
             ]
         );
     }

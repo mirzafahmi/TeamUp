@@ -2,6 +2,6 @@
 
 @section('content')
 
-@include('user.shared.profile_card_edit')
+@include('users.shared.profile_card')
 
 @endsection

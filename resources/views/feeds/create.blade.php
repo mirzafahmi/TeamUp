@@ -10,12 +10,15 @@
                 @enderror
             </div>
             @livewire('game-mode-role')
-            @include('feed.shared.date-time-form')
+            @include('feeds.shared.date-time-form')
+            <div class="form-floating mb-3">
+                <input type="number" name="spot_availability" class="form-control" id="spotAvailability" placeholder="Enter a number" aria-label="Number input">
+                <label for="spotAvailability">Spot Availablity</label>
+                @error('spot_availability')
+                    <span class="d-block fs-6 text-danger mt-2">{{ $message }}</span>
+                @enderror
+            </div>
             <button type="submit" class="btn btn-dark"> Share </button>
         </form>
     </div>
-    @livewire('test-component')
 @endauth
-@guest()
-    <h4> TBC </h4>
-@endguest

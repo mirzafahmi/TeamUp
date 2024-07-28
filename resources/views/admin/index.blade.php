@@ -21,6 +21,11 @@
                 description="To view, create, update and delete items of Play Mode." 
                 link="{{ route('admin.play-modes.index') }}" 
             />
+            <x-admin.card 
+                title="Play Role List" 
+                description="To view, create, update and delete items of Play Role." 
+                link="{{ route('admin.play-roles.index') }}" 
+            />
         </div>
     </div>
 @endsection

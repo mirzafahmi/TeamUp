@@ -14,4 +14,8 @@ class Category extends Model
         'description'
     ];
 
+    public function sport()
+    {
+        return $this->belongsTo(Sport::class);
+    }
 }

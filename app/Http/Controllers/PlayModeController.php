@@ -9,7 +9,7 @@ class PlayModeController extends Controller
 {
     public function index()
     {
-        $playModes = PlayMode::all();
+        $playModes = PlayMode::with('sport')->get();
 
         return view('admin.play-modes.index', compact('playModes'));
     }

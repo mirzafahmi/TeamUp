@@ -14,4 +14,13 @@ class PlayLevel extends Model
         'description'
     ];
 
+    public function sport()
+    {
+        return $this->belongsTo(Sport::class);
+    }
+
+    public function feed()
+    {
+        return $this->hasMany(Sport::class);
+    }
 }

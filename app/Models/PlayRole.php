@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class PlayRole extends Model
 {
     use HasFactory;
+
+    public function sport()
+    {
+        return $this->belongsTo(Sport::class);
+    }
+
+    public function feed()
+    {
+        return $this->hasMany(Sport::class);
+    }
 }

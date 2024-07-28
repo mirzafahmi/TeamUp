@@ -19,16 +19,18 @@
                         {{ $user->email}} 
                     </span>
                     <div class="mt-3">
-                        @include('user.shared.profile_stats')
+                        @include('users.shared.profile_stats')
                     </div>
                 </div>
             </div>
+            @can('profile-owner', $user)
             <div class="pe-3">
                 <a href="{{ route('users.edit', $user->id) }}">
                     <i class="fa-solid fa-gear"></i>
                     Edit
                 </a>
             </div>
+            @endcan
         </div>
         <div class="row px-3">
             <div class="col px-2 mt-4">

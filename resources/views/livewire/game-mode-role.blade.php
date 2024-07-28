@@ -1,26 +1,45 @@
-<div class="mb-3">
-    <div class="form-floating">
-        <select wire:model.live="sportId" class="form-select" aria-label="Floating label select example">
-            <option value="">Select Sports</option>
-            @foreach ($this->sports as $sport)
-                <option value="{{ $sport->id }}">{{ $sport->name }}</option>
-            @endforeach
-        </select>
-    </div>
-    <div class="form-floating">
-        <select wire:model="modeId" class="form-select" aria-label="Floating label select example">
-            <option value="">Select Modes</option>
-            @foreach ($this->modes as $mode)
-                <option value="{{ $mode->id }}">{{ $mode->name }}</option>
-            @endforeach
-        </select>
-    </div>
-    <div class="form-floating">
-        <select wire:model="roleId" class="form-select" aria-label="Floating label select example">
-            <option value="">Select Roles</option>
-            @foreach ($this->roles as $role)
-                <option value="{{ $role->id }}">{{ $role->name }}</option>
-            @endforeach
-        </select>
-    </div>
+<div class="mb-2">
+    <x-dropdown-select
+        id="sportSelect"
+        model="sportId"
+        name="sport_id"
+        placeholder="Select Sports"
+        :options="$sports"
+        label="Sports List"
+        :oldValue="$sportId"
+        :editing="$editing"
+    />
+
+    <x-dropdown-select
+        id="levelSelect"
+        model="levelId"
+        name="play_level_id"
+        placeholder="Select Levels"
+        :options="$levels"
+        label="Levels List"
+        :oldValue="$levelId"
+        :editing="$editing"
+    />
+
+    <x-dropdown-select
+        id="modeSelect"
+        model="modeId"
+        name="play_mode_id"
+        placeholder="Select Modes"
+        :options="$modes"
+        label="Modes List"
+        :oldValue="$modeId"
+        :editing="$editing"
+    />
+
+    <x-dropdown-select
+        id="roleSelect"
+        model="roleId"
+        name="play_role_id"
+        placeholder="Select Roles"
+        :options="$roles"
+        label="Roles List"
+        :oldValue="$roleId"
+        :editing="$editing"
+    />
 </div>

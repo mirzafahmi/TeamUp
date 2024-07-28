@@ -15,5 +15,13 @@ class PlayMode extends Model
         'team_size'
     ];
 
+    public function sport()
+    {
+        return $this->belongsTo(Sport::class);
+    }
 
+    public function feed()
+    {
+        return $this->hasMany(Sport::class);
+    }
 }

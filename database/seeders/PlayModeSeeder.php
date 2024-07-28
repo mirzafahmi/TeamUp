@@ -16,34 +16,35 @@ class PlayModeSeeder extends Seeder
     {
         $sports = Sport::pluck('id', 'name');
 
-        PlayMode::factory()->create([
-            'name' => 'turbo',
-            'sport_id' => $sports['dota 2'],
-            'team_size' => 5
-        ]);
+        $modesBySport = [
+            'dota 2' => [
+                ['name' => 'turbo', 'team_size' => 5]
+            ],
+            'football' => [
+                ['name' => '11 sides', 'team_size' => 11],
+                ['name' => '7 sides', 'team_size' => 7]
+            ],
+            'gray zone warfare' => [
+                ['name' => 'duo', 'team_size' => 2],
+                ['name' => 'squad', 'team_size' => 4]
+            ],
+            'volleyball' => [
+                ['name' => 'beach', 'team_size' => 2],
+                ['name' => 'indoor', 'team_size' => 6]
+            ]
+        ];
 
-        PlayMode::factory()->create([
-            'name' => 'duo',
-            'sport_id' => $sports['gray zone warfare'],
-            'team_size' => 2
-        ]);
-
-        PlayMode::factory()->create([
-            'name' => 'squad',
-            'sport_id' => $sports['gray zone warfare'],
-            'team_size' => 4
-        ]);
-
-        PlayMode::factory()->create([
-            'name' => '11 sides',
-            'sport_id' => $sports['football'],
-            'team_size' => 11
-        ]);
-
-        PlayMode::factory()->create([
-            'name' => '7 sides',
-            'sport_id' => $sports['football'],
-            'team_size' => 7
-        ]);
+        foreach ($modesBySport as $sportName => $modes)
+        {
+            $sportId = $sports[$sportName];            
+            foreach ($modes as $mode)
+            {
+                PlayMode::create([
+                    'name' => $mode['name'],
+                    'sport_id' => $sportId,
+                    'team_size' => $mode['team_size']
+                ]);
+            }
+        }
     }
 }

@@ -17,6 +17,18 @@
             <li class="nav-item">
                 <a class="nav-link"
                     href="">
+                    <span>Sports</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                    href="">
+                    <span>Community</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                    href="">
                     <span>About</span>
                 </a>
             </li>

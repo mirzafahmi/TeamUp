@@ -16,24 +16,21 @@ class PlayRoleSeeder extends Seeder
     {
         $sports = Sport::pluck('id', 'name');
 
-        PlayRole::factory()->create([
-            'sport_id' => $sports['football'],
-            'name' => 'forward'
-        ]);
-
-        PlayRole::factory()->create([
-            'sport_id' => $sports['football'],
-            'name' => 'midfield'
-        ]);
-
-        PlayRole::factory()->create([
-            'sport_id' => $sports['dota 2'],
-            'name' => 'carry'
-        ]);
-
-        PlayRole::factory()->create([
-            'sport_id' => $sports['dota 2'],
-            'name' => 'support'
-        ]);
+        $rolesBySport = [
+            'dota 2' => ['carry', 'support', 'offlane'],
+            'football' => ['forwarder', 'midfielder', 'defender', 'keeper'],
+            'gray zone warfare' => ['sniper', 'cqb'],
+            'volleyball' => ['libero', 'setter', 'spiker']
+        ];
+    
+        foreach ($rolesBySport as $sportName => $roles) {
+            $sportId = $sports[$sportName];
+            foreach ($roles as $role) {
+                PlayRole::factory()->create([
+                    'sport_id' => $sportId,
+                    'name' => $role
+                ]);
+            }
+        }
     }
 }

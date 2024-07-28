@@ -2,21 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Feed;
+use Database\Factories\FeedFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class UserSeeder extends Seeder
+class FeedSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        User::factory()->create([
-            'email' => 'test@gmail.com'
-        ]);
-
-        User::factory()->count(10)->create();
+        Feed::factory()->count(10)->create();
     }
 }

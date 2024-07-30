@@ -1,6 +1,6 @@
 <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fa-solid fa-gear"></i>
+    <button class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa-solid fa-ellipsis-vertical"></i>
     </button>
     <ul class="dropdown-menu">
         <li><a class="dropdown-item" href="{{ route('feeds.show', $feed->id) }}">View</a></li>

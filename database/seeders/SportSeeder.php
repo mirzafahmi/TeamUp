@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Sport;
+use Database\Factories\SportFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,24 +17,19 @@ class SportSeeder extends Seeder
     {
         $categories = Category::pluck('id', 'name')->toArray();
 
-        Sport::factory()->create([
-            'name' => 'football',
-            'category_id' => $categories['sports'],
-        ]);
+        $sportDetails = [
+            ['name' => 'football', 'category' => 'sports', 'image_format' => '.jpeg'], 
+            ['name' => 'volleyball', 'category' => 'sports', 'image_format' => '.jpeg'],  
+            ['name' =>'dota 2', 'category' => 'esports', 'image_format' => '.png'], 
+            ['name' =>'gray zone warfare', 'category' => 'esports', 'image_format' => '.jpg'], 
+        ];
 
-        Sport::factory()->create([
-            'name' => 'volleyball',
-            'category_id' => $categories['sports'],
-        ]);
-
-        Sport::factory()->create([
-            'name' => 'dota 2',
-            'category_id' => $categories['esports'],
-        ]);
-
-        Sport::factory()->create([
-            'name' => 'gray zone warfare',
-            'category_id' => $categories['sports'],
-        ]);
+        foreach ($sportDetails as $key => $value){
+            Sport::factory()->create([
+                'name'=> $value['name'],
+                'category_id' => $categories[$value['category']],
+                'image' => 'sport/' . str_replace(' ', '_', $value['name']) . $value['image_format']
+            ]);
+        }
     }
 }

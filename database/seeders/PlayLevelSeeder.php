@@ -17,7 +17,7 @@ class PlayLevelSeeder extends Seeder
         
         foreach ($playLevels as $playLevel)
         {
-            PlayLevel::create([
+            PlayLevel::factory()->create([
                 'name' => $playLevel
             ]);
         }

@@ -9,7 +9,7 @@ class Feed extends Model
 {
     use HasFactory;
 
-    protected $with = ['user:id,name,image'];
+    protected $with = ['user:id,name,image,username'];
     
     protected $fillable = [
         'sport_id',
@@ -18,8 +18,9 @@ class Feed extends Model
         'play_role_id',
         'spot_availability',
         'content',
-        'event_date',
-        'user_id'
+        'event_location_id',
+        'user_id',
+        'event_date'
     ];
 
     public function user() 

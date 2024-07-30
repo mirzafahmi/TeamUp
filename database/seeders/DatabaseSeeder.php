@@ -17,11 +17,15 @@ class DatabaseSeeder extends Seeder
             [
                 UserSeeder::class,
                 CategorySeeder::class,
+                BadgeSeeder::class,
                 SportSeeder::class,
+                EventLocationSeeder::class,
                 PlayLevelSeeder::class,
                 PlayModeSeeder::class,
                 PlayRoleSeeder::class,
                 FeedSeeder::class,
+                PreferredSportSeeder::class,
+                FollowerSeeder::class,
             ]
         );
     }

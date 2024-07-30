@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\EventLocation;
 use App\Models\PlayLevel;
 use App\Models\PlayMode;
 use App\Models\PlayRole;
@@ -30,6 +31,7 @@ class FeedFactory extends Factory
             'play_role_id' => PlayRole::where('sport_id', $sportId)->inRandomOrder()->first()->id,
             'spot_availability' => rand(1, 20),
             'content' => fake()->paragraph(),
+            'event_location_id' => EventLocation::inRandomOrder()->first()->id,
             'user_id' => User::inRandomOrder()->first()->id,
             'event_date' => fake()->dateTime()->format('Y-m-d H:i:s'),
         ];

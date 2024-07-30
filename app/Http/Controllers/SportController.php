@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SportController extends Controller
 {
@@ -19,15 +20,23 @@ class SportController extends Controller
 
     public function store(Request $request)
     {
-        $validate = $request->validate(
+        $validated = $request->validate(
             [
                 'name' => 'required|min:3',
                 'description' => 'nullable',
-                'category_id' => 'required'
+                'category_id' => 'required',
+                'image' => 'nullable|image|max:2048'
             ]
         );
 
-        $sport = Sport::create($validate);
+        if(request()->has('image'))
+        {
+            $imagePath = request()->file('image')->store('profile', 'public');
+
+            $validated['image'] = $imagePath;
+        }
+
+        $sport = Sport::create($validated);
 
         return redirect()->route('admin.sports.index')
             ->with('success', "'{$sport->name}' play level is created successfullly");
@@ -45,15 +54,25 @@ class SportController extends Controller
 
     public function update(Request $request, Sport $sport)
     {
-        $validate = $request->validate(
+        $validated = $request->validate(
             [
                 'name' => 'required|min:3',
                 'description' => 'nullable',
-                'category_id' => 'required'
+                'category_id' => 'required',
+                'image' => 'nullable|image|max:2048'
             ]
         );
 
-        $sport->update($validate);
+        if(request()->has('image'))
+        {
+            $imagePath = request()->file('image')->store('sport', 'public');
+
+            $validated['image'] = $imagePath;
+
+            Storage::disk('public')->delete($sport->image ?? '');
+        }
+
+        $sport->update($validated);
 
         return redirect()->route('admin.sports.index')
             ->with('success', "'{$sport->name}' play level is created successfullly");

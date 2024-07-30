@@ -10,18 +10,23 @@ class UserController extends Controller
 {
     public function show(User $user)
     {
+        $feeds = $user->feeds()->paginate(5);
+        $sports = $user->preferredSports()->get();
+
         if (auth()->check() && auth()->user()->id == $user->id) {
             return redirect()->route('profile');
         }
 
-        return view('users.show', compact('user'));
+        return view('users.show', compact('user', 'feeds', 'sports'));
     }
 
     public function profile()
     {
         $user = auth()->user();
+        $feeds = $user->feeds()->paginate(5);
+        $sports = $user->preferredSports()->get();
 
-        return view('users.show', compact('user'));
+        return view('users.show', compact('user', 'feeds', 'sports'));
     }
 
     public function edit(User $user)
@@ -35,7 +40,7 @@ class UserController extends Controller
                 [
                     'name' => 'required|min:4|max:30',
                     'bio' => 'nullable|min:1|max:255',
-                    'image' => 'image'
+                    'image' => 'image|max:2048'
                 ]
             );
         

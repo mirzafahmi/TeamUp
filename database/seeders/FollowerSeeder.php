@@ -2,18 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Feed;
-use Database\Factories\FeedFactory;
+use App\Models\Follower;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class FeedSeeder extends Seeder
+class FollowerSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Feed::factory()->count(30)->create();
+        Follower::factory()->count(20)->create();
     }
 }

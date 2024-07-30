@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreignIdFor(PlayRole::class, 'play_role_id')->constrained()->onDelete('cascade');
             $table->integer('spot_availability');
             $table->string('content')->nullable();
+            $table->foreignUuid('event_location_id')->constrained()->onDelete('cascade');
             $table->foreignIdFor(User::class, 'user_id')->constrained()->onDelete('cascade');
             $table->dateTime('event_date');
             $table->timestamps();

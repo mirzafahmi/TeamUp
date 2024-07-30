@@ -49,12 +49,12 @@ class User extends Authenticatable
         ];
     }
 
-    public function feed()
+    public function feeds()
     {
         return $this->hasMany(Feed::class);
     }
 
-    public function comment()
+    public function comments()
     {
         return $this->hasMany(Comment::class);
     }
@@ -67,5 +67,20 @@ class User extends Authenticatable
         }
 
         return "https://api.dicebear.com/6.x/fun-emoji/svg?seed={$this->username}";
+    }
+
+    public function followings()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id')->withTimestamps();
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id')->withTimestamps();
+    }
+
+    public function preferredSports()
+    {
+        return $this->hasMany(PreferredSport::class);
     }
 }

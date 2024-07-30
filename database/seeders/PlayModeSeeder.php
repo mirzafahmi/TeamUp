@@ -39,7 +39,7 @@ class PlayModeSeeder extends Seeder
             $sportId = $sports[$sportName];            
             foreach ($modes as $mode)
             {
-                PlayMode::create([
+                PlayMode::factory()->create([
                     'name' => $mode['name'],
                     'sport_id' => $sportId,
                     'team_size' => $mode['team_size']

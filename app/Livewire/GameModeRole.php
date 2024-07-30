@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\EventLocation;
 use App\Models\PlayLevel;
 use App\Models\PlayMode;
 use App\Models\PlayRole;
@@ -15,6 +16,7 @@ class GameModeRole extends Component
     public $levelId;
     public $modeId;
     public $roleId;
+    public $locationId;
 
     public $feed;
     public $editing = false;
@@ -43,6 +45,12 @@ class GameModeRole extends Component
         return PlayRole::where('sport_id', $this->sportId)->get();
     }
 
+    #[Computed()]
+    public function locations()
+    {
+        return EventLocation::all();
+    }
+
     public function mount($feed = null, $editing = false)
     {
         $this->feed = $feed;
@@ -53,6 +61,7 @@ class GameModeRole extends Component
             $this->levelId = $feed->play_level_id;
             $this->modeId = $feed->play_mode_id;
             $this->roleId = $feed->play_role_id;
+            $this->locationId = $feed->event_location_id;
         }
     }
 
@@ -63,6 +72,7 @@ class GameModeRole extends Component
             'levels' => $this->levels(),
             'modes' => $this->modes(),
             'roles' => $this->roles(),
+            'locations' => $this->locations(),
         ]);
     }
 }

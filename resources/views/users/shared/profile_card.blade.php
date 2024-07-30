@@ -68,4 +68,6 @@
             </div>
         </div>
     </div>
+    @include('users.shared.follower-modal')
+    @include('users.shared.following-modal')
 </div>

@@ -14,4 +14,9 @@ class EventLocation extends Model
     public $incrementing = false;
 
     protected $fillable = ['id', 'name', 'address', 'map_link', 'sport_id'];
+
+    public function feeds()
+    {
+        return $this->hasMany(Feed::class);
+    }
 }

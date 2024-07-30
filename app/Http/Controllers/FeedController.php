@@ -32,7 +32,7 @@ class FeedController extends Controller
     }
 
     public function store(Request $request)
-    {
+    {   
         $validated = $request->validate([
             'sport_id' => 'required|exists:sports,id',
             'play_level_id' => 'required|exists:play_levels,id',
@@ -40,6 +40,7 @@ class FeedController extends Controller
             'play_role_id' => 'required|exists:play_roles,id',
             'spot_availability' => 'required|numeric|min:1',
             'content' => 'required|min:1',
+            'event_location_id' => 'required',
             'event_date' => 'required|date_format:Y-m-d\TH:i',
         ]);
 
@@ -69,6 +70,7 @@ class FeedController extends Controller
             'play_role_id' => 'required|exists:play_roles,id',
             'spot_availability' => 'required|numeric|min:1',
             'content' => 'required|min:1',
+            'event_location_id' => 'required',
             'event_date' => 'required|date_format:Y-m-d\TH:i',
         ]);
 

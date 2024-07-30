@@ -51,13 +51,20 @@
                     <span class="d-block">Event Date</span>
                     <span>{{ $feed->event_date  }}</span>
                 </div>
+                
+                <div class="col mb-2">
+                    <span class="d-block">Event Location</span>
+                    <span>{{ $feed->eventLocation->name}}</span>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col mb-2">
                     <span class="d-block">Spot Availability</span>
                     <span>{{ $feed->spot_availability  }}</span>
                 </div>
-            </div>
-            <div class="row">
-                <span>Current Team</span>
+                <div class="col mb-2">
+                    <span class="d-block">Current Team</span>
+                </div>
             </div>
         </div>
     </div>

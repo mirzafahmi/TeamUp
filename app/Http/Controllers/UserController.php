@@ -12,12 +12,14 @@ class UserController extends Controller
     {
         $feeds = $user->feeds()->paginate(5);
         $sports = $user->preferredSports()->get();
+        $followers = $user->followers()->get();
+        $followings = $user->followings()->get();
 
         if (auth()->check() && auth()->user()->id == $user->id) {
             return redirect()->route('profile');
         }
 
-        return view('users.show', compact('user', 'feeds', 'sports'));
+        return view('users.show', compact('user', 'feeds', 'sports', 'followers', 'followings'));
     }
 
     public function profile()
@@ -25,8 +27,10 @@ class UserController extends Controller
         $user = auth()->user();
         $feeds = $user->feeds()->paginate(5);
         $sports = $user->preferredSports()->get();
+        $followers = $user->followers()->get();
+        $followings = $user->followings()->get();
 
-        return view('users.show', compact('user', 'feeds', 'sports'));
+        return view('users.show', compact('user', 'feeds', 'sports', 'followers', 'followings'));
     }
 
     public function edit(User $user)

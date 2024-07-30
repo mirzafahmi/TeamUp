@@ -51,4 +51,9 @@ class Feed extends Model
     {
         return $this->belongsTo(Sport::class);
     }
+
+    public function eventLocation()
+    {
+        return $this->belongsTo(EventLocation::class);
+    }
 }

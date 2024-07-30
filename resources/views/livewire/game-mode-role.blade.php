@@ -42,4 +42,15 @@
         :oldValue="$roleId"
         :editing="$editing"
     />
+
+    <x-dropdown-select
+        id="eventLocationSelect"
+        model="locationId"
+        name="event_location_id"
+        placeholder="Select Event Location"
+        :options="$locations"
+        label="Event Location List"
+        :oldValue="$locationId"
+        :editing="$editing"
+    />
 </div>

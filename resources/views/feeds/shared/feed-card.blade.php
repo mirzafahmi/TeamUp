@@ -1,4 +1,4 @@
-<div class="card my-3">
+<div class="card mb-3">
     <div class="px-3 pt-4 pb-2">
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
@@ -19,7 +19,7 @@
                     </span>
                 </div>
             </div>
-            @include('components.settings-dropdown')
+            @include('components.feeds-settings-dropdown')
         </div>
         <hr class="">
         <div class="mt-3">
@@ -79,4 +79,8 @@
             </div>
         </div>
     </div>
+    @if($showComment)
+        <hr>
+        @include('comments.show')
+    @endif
 </div>

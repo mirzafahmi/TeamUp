@@ -12,7 +12,8 @@ class Comment extends Model
     protected $fillable = [
         'feed_id',
         'user_id',
-        'content'
+        'content',
+        'request_to_join'
     ];
 
     public function user() 

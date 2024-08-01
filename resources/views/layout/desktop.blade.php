@@ -14,9 +14,7 @@
 
     <script src="https://kit.fontawesome.com/25d6682bc0.js" crossorigin="anonymous"></script>
     
-    <title>Document</title>
-
-    
+    <title>{{ config('app.name') }} | @yield('title')</title>
 </head>
 <body class="">
     @include('partial.navbar')

@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card mb-5">
     <div class="px-3 pt-4 pb-2">
         <div class="d-flex align-items-center justify-content-between position-relative">
             <div class="d-flex align-items-center">
@@ -61,9 +61,20 @@
                 </p>
             </div>
             <div class="col px-2 mt-4">
-                <h5 class="fs-5"> Badges : </h5>
+                <h5 class="fs-5">
+                    Badges : 
+                </h5>
                 <p class="fs-6 fw-light">
-                    {{ $user->bio }}
+                @forelse($user->badges as $badge)
+                        <img 
+                            style="width:50px; height: 50px;" 
+                            class="me-2 avatar-sm rounded-circle" 
+                            src="{{ $badge->getImageURL() }}"
+                            alt="{{ $badge->name}}"
+                        >
+                    @empty
+                        No badges yet
+                    @endforelse
                 </p>
             </div>
         </div>

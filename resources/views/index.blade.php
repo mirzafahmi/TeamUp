@@ -1,5 +1,7 @@
 @extends('layout.dashboard')
 
+@section('title', 'Feeds')
+
 @section('middle-content')
     @auth()
         @include('feeds.create')
@@ -7,7 +9,7 @@
     @endauth()
     <div class="my-3">
         @foreach($feeds as $feed)
-            @include('feeds.shared.feed-card')
+            @include('feeds.shared.feed-card', ['showComment' => false])
         @endforeach 
     </div>
     <div class="mt-3">

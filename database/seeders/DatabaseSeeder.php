@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
                 PlayModeSeeder::class,
                 PlayRoleSeeder::class,
                 FeedSeeder::class,
+                CommentSeeder::class,
                 PreferredSportSeeder::class,
                 FollowerSeeder::class,
             ]

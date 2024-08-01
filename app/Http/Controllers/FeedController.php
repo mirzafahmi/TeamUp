@@ -3,11 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Feed;
+use App\Models\User;
+use App\Services\BadgeService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class FeedController extends Controller
 {
+    protected $badgeService;
+
+    public function __construct(BadgeService $badgeService)
+    {
+        $this->badgeService = $badgeService;
+    }
+    
     public function index()
     {
         $editing = false;
@@ -49,6 +58,8 @@ class FeedController extends Controller
             ->format('Y-m-d H:i:s');
 
         Feed::create($validated);
+
+        $this->badgeService->checkAndAssignBadges($validated['user_id']);
 
         return redirect()->route('index')
             ->with('success', 'Your TeamUp Feed created successfully!');

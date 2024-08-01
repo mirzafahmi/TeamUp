@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\PlayLevelController;
 use App\Http\Controllers\PlayModeController;
@@ -30,6 +31,8 @@ Route::resource('users', UserController::class)->only('show');
 
 Route::resource('feeds', FeedController::class)->middleware(['auth', CheckOwner::class]);
 Route::resource('feeds', FeedController::class)->only('show');
+
+Route::resource('comments', CommentController::class)->only('store', 'update', 'destroy')->middleware('auth');
 
 Route::middleware(['auth', 'can:admin-access'])->prefix('/admin')->as('admin.')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('index');

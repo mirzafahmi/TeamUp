@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\BadgeController;
+use App\Models\Comment;
 use App\Models\Feed;
 use App\Models\User;
+use App\Services\BadgeService;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -15,7 +18,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(BadgeService::class, function ($app) {
+            return new BadgeService(new BadgeController());
+        });
     }
 
     /**
@@ -35,6 +40,10 @@ class AppServiceProvider extends ServiceProvider
             return $authUser->id == $targetUser->id;
         });
 
+        Gate::define('comment-owner', function (User $user, Comment $comment) {
+            return $user->id == $comment->user_id;
+        });
+        
         Paginator::useBootstrapFive();
     }
 }

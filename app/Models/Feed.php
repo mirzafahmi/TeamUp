@@ -28,9 +28,9 @@ class Feed extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function comment()
+    public function comments()
     {
-        return $this->belongsTo(Comment::class);
+        return $this->hasMany(Comment::class)->orderBy('created_at');
     }
 
     public function playLevel()

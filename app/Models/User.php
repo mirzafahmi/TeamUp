@@ -83,4 +83,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(PreferredSport::class);
     }
+
+    public function badges()
+    {
+        return $this->belongsToMany(Badge::class, 'user_badges')->withTimestamps();
+    }
 }

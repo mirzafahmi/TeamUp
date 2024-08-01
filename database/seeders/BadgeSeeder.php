@@ -14,19 +14,20 @@ class BadgeSeeder extends Seeder
     public function run(): void
     {
         $badges = [
-            'Getting Started',
-            'Veteran',
-            'Comunity Leader',
-            'Enthusiast',
-            'Versatile',
-            'Social butterfly',
+            'Getting Started' => 'Created at least 1 feeds',
+            'Veteran' => 'Created at least 50 feeds',
+            'Comunity Leader' => 'Reached at least 50 follower',
+            'Enthusiast' => 'Have more than 4 preferred sports',
+            'Versatile' => 'Played more that 4 roles in any sport',
+            'Social butterfly' => 'Commented at least 50 comments',
         ];
 
-        foreach ($badges as $badge) 
+        foreach ($badges as $name => $description) 
         {
             Badge::factory()->create([
-                'name' => $badge,
-                'image' => 'badge/' . str_replace(' ', '_', $badge) . 'png'
+                'name' => $name,
+                'description' => $description,
+                'image' => 'badge/' . transformName($name) . '.png'
             ]);
         }
     }

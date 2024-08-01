@@ -18,6 +18,9 @@ return new class extends Migration
             $table->foreignIdFor(Feed::class, 'feed_id')->constrained()->onDelete('cascade');
             $table->foreignIdFor(User::class, 'user_id')->constrained()->onDelete('cascade');
             $table->string('content');
+            $table->boolean('request_to_join')->default(false);
+            $table->string('status')->nullable();
+            $table->boolean('is_read')->default(false);
             $table->timestamps();
         });
     }

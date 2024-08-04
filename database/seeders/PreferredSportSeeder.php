@@ -13,6 +13,6 @@ class PreferredSportSeeder extends Seeder
      */
     public function run(): void
     {
-        PreferredSport::factory()->count(20)->create();
+        PreferredSport::factory()->count(5)->create();
     }
 }

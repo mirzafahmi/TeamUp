@@ -13,7 +13,7 @@ class PlayLevelSeeder extends Seeder
      */
     public function run(): void
     {
-        $playLevels = ['unranked', 'tournament', 'casual', 'training', 'co-op', 'sandbox'];
+        $playLevels = ['Unranked', 'Tournament', 'Casual', 'Training', 'Co-op', 'Sandbox'];
         
         foreach ($playLevels as $playLevel)
         {

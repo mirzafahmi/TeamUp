@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Models\Feed;
 use App\Models\User;
 use App\Services\BadgeService;
+use Filament\Facades\Filament;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -28,8 +29,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Filament::registerNavigationGroups([
+            'Feed Settings',
+            'Play Settings',
+            'Sport Settings',
+            'User Settings',
+        ]);
+
         Gate::define('admin-access', function (User $user) {
-            return $user->is_admin == 1;
+            return $user->is_admin;
         });
 
         Gate::define('feed-owner', function (User $user, Feed $feed) {
@@ -45,5 +53,6 @@ class AppServiceProvider extends ServiceProvider
         });
         
         Paginator::useBootstrapFive();
+
     }
 }

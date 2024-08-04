@@ -49,12 +49,23 @@
                 <h5 class="fs-5"> Prefered Sports : </h5>
                 <p class="fs-6 fw-light">
                     @forelse($sports as $preferredSport)
-                        <img 
-                            style="width:50px; height: 50px;" 
-                            class="me-2 avatar-sm rounded-circle" 
-                            src="{{ $preferredSport->getImageURL() }}"
-                            alt="{{ $preferredSport->sports->name}}"
-                        >
+                        <div class="me-2 d-inline">
+                            <span 
+                                class="d-inline-block" 
+                                tabindex="0" 
+                                data-bs-toggle="popover" 
+                                data-bs-trigger="hover focus" 
+                                data-bs-placement="bottom"
+                                data-bs-content="{{ $preferredSport->sports->name }}"
+                            >
+                                <img 
+                                    style="width:50px; height: 50px;" 
+                                    class="avatar-sm rounded-circle" 
+                                    src="{{ $preferredSport->getImageURL() }}"
+                                    alt="{{ $preferredSport->sports->name }}"
+                                >
+                            </span>
+                        </div>
                     @empty
                         No preferred sports yet
                     @endforelse
@@ -66,15 +77,26 @@
                 </h5>
                 <p class="fs-6 fw-light">
                 @forelse($user->badges as $badge)
-                        <img 
-                            style="width:50px; height: 50px;" 
-                            class="me-2 avatar-sm rounded-circle" 
-                            src="{{ $badge->getImageURL() }}"
-                            alt="{{ $badge->name}}"
-                        >
-                    @empty
-                        No badges yet
-                    @endforelse
+                    <div class="me-2 d-inline">
+                        <span 
+                            class="d-inline-block" 
+                            tabindex="0" 
+                            data-bs-toggle="popover" 
+                            data-bs-trigger="hover focus" 
+                            data-bs-placement="bottom"
+                            data-bs-content="{{ $badge->name }}"
+                            >
+                                <img 
+                                    style="width:50px; height: 50px;" 
+                                    class="me-2 avatar-sm rounded-circle" 
+                                    src="{{ $badge->getImageURL() }}"
+                                    alt="{{ $badge->name }}"
+                                >
+                        </span>
+                    </div>
+                @empty
+                    No badges yet
+                @endforelse
                 </p>
             </div>
         </div>
@@ -82,3 +104,8 @@
     @include('users.shared.follower-modal')
     @include('users.shared.following-modal')
 </div>
+
+<script>
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+</script>

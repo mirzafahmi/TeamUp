@@ -13,7 +13,7 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        $categories = ['esports', 'sports'];
+        $categories = ['eSports', 'Sports'];
 
         foreach ($categories as $category)
         {

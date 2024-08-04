@@ -13,7 +13,13 @@ class EventLocation extends Model
     protected $keyType = 'string';
     public $incrementing = false;
 
-    protected $fillable = ['id', 'name', 'address', 'map_link', 'sport_id'];
+    protected $fillable = [
+        'id', 
+        'name', 
+        'address', 
+        'map_link', 
+        'sport_id'
+    ];
 
     public function feeds()
     {

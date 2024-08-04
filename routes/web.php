@@ -34,10 +34,10 @@ Route::resource('feeds', FeedController::class)->only('show');
 
 Route::resource('comments', CommentController::class)->only('store', 'update', 'destroy')->middleware('auth');
 
-Route::middleware(['auth', 'can:admin-access'])->prefix('/admin')->as('admin.')->group(function () {
-    Route::get('/', [AdminController::class, 'index'])->name('index');
-    Route::resource('categories', SportCategoryController::class);
-    Route::resource('play-levels', PlayLevelController::class);
-    Route::resource('play-modes', PlayModeController::class);
-    Route::resource('play-roles', PlayRoleController::class);
-});
+// Route::middleware(['auth', 'can:admin-access'])->prefix('/admin')->as('admin.')->group(function () {
+//     Route::get('/', [AdminController::class, 'index'])->name('index');
+//     Route::resource('categories', SportCategoryController::class);
+//     Route::resource('play-levels', PlayLevelController::class);
+//     Route::resource('play-modes', PlayModeController::class);
+//     Route::resource('play-roles', PlayRoleController::class);
+// });

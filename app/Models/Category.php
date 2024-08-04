@@ -16,6 +16,6 @@ class Category extends Model
 
     public function sport()
     {
-        return $this->belongsTo(Sport::class);
+        return $this->hasMany(Sport::class);
     }
 }

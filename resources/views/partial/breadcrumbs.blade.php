@@ -8,8 +8,8 @@
             </li>
             @can('admin-access')
             <li class="nav-item">
-                <a class="{{ Route::is('admin.index') ? 'text-white bg-primary rounded' : '' }} nav-link"
-                    href="{{ route('admin.index') }}">
+                <a class="{{ Route::is('admin') ? 'text-white bg-primary rounded' : '' }} nav-link"
+                    href="{{ url('/admin') }}">
                     <span>Admin Dashboard</span>
                 </a>
             </li>

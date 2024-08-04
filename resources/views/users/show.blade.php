@@ -12,4 +12,7 @@
     No feeds yet
 @endforelse
 
+<div class="mt-3">
+    {{ $feeds->withQueryString()->links() }}
+</div>
 @endsection

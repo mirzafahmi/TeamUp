@@ -32,9 +32,7 @@ class PreferredSportFactory extends Factory
 
             if (!$exists) {
                 $uniquePairFound = true;
-            } else {
-                break;
-            }
+            } 
         }
 
         return [

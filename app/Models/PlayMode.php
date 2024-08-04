@@ -12,7 +12,8 @@ class PlayMode extends Model
     protected $fillable = [
         'name',
         'description',
-        'team_size'
+        'team_size',
+        'sport_id'
     ];
 
     public function sport()

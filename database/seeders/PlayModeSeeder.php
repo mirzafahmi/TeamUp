@@ -17,18 +17,20 @@ class PlayModeSeeder extends Seeder
         $sports = Sport::pluck('id', 'name');
 
         $modesBySport = [
-            'dota 2' => [
-                ['name' => 'turbo', 'team_size' => 5]
+            'Dota 2' => [
+                ['name' => 'Turbo', 'team_size' => 5],
+                ['name' => 'Normal', 'team_size' => 5],
+                ['name' => 'Single Draft', 'team_size' => 5]
             ],
-            'football' => [
+            'Football' => [
                 ['name' => '11 sides', 'team_size' => 11],
                 ['name' => '7 sides', 'team_size' => 7]
             ],
-            'gray zone warfare' => [
+            'Gray Zone Warfare' => [
                 ['name' => 'duo', 'team_size' => 2],
                 ['name' => 'squad', 'team_size' => 4]
             ],
-            'volleyball' => [
+            'Volleyball' => [
                 ['name' => 'beach', 'team_size' => 2],
                 ['name' => 'indoor', 'team_size' => 6]
             ]

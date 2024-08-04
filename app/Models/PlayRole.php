@@ -9,6 +9,12 @@ class PlayRole extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'description',
+        'sport_id'
+    ];
+
     public function sport()
     {
         return $this->belongsTo(Sport::class);

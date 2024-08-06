@@ -24,4 +24,14 @@ class PlayRole extends Model
     {
         return $this->hasMany(Sport::class);
     }
+
+    public function feeds()
+    {
+        return $this->belongsToMany(Feed::class, 'feed_play_role')->withTimestamps();
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

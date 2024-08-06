@@ -28,8 +28,6 @@ class FeedFactory extends Factory
             'sport_id' => $sportId,
             'play_level_id' => PlayLevel::inRandomOrder()->first()->id,
             'play_mode_id' => PlayMode::where('sport_id', $sportId)->inRandomOrder()->first()->id,
-            'play_role_id' => PlayRole::where('sport_id', $sportId)->inRandomOrder()->first()->id,
-            'spot_availability' => rand(1, 20),
             'content' => fake()->paragraph(),
             'event_location_id' => EventLocation::inRandomOrder()->first()->id,
             'user_id' => User::inRandomOrder()->first()->id,

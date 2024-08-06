@@ -13,7 +13,10 @@ class Comment extends Model
         'feed_id',
         'user_id',
         'content',
-        'request_to_join'
+        'request_to_join',
+        'play_role_id',
+        'join_status_id',
+        'is_read'
     ];
 
     public function user() 
@@ -24,5 +27,15 @@ class Comment extends Model
     public function feed() 
     {
         return $this->belongsTo(Feed::class);
+    }
+
+    public function playRole()
+    {
+        return $this->belongsTo(PlayRole::class);
+    }
+
+    public function joinStatus()
+    {
+        return $this->belongsTo(JoinStatus::class);
     }
 }

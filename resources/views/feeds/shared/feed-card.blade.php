@@ -41,11 +41,23 @@
                     <span class="d-block">Play Modes</span>
                     <span>{{ $feed->playMode->name  }}</span>
                 </div>
+                
                 <div class="col mb-2">
-                    <span class="d-block">Play Roles</span>
-                    <span>{{ $feed->playRole->name  }}</span>
+                    <span class="d-block">Current Team</span>
                 </div>
             </div>
+            @foreach ( $feed->playRoles as $role)
+            <div class="row">
+                <div class="col mb-2">
+                    <span class="d-block">Play Roles</span>
+                    <span>{{ $role->name }}</span>
+                </div>
+                <div class="col mb-2">
+                    <span class="d-block">Spot Availability</span>
+                    <span>{{ $role->pivot->spot_availability }}</span>
+                </div>
+            </div>
+            @endforeach
             <div class="row">
                 <div class="col mb-2">
                     <span class="d-block">Event Date</span>
@@ -57,24 +69,24 @@
                     <span>{{ $feed->eventLocation->name}}</span>
                 </div>
             </div>
-            <div class="row">
-                <div class="col mb-2">
-                    <span class="d-block">Spot Availability</span>
-                    <span>{{ $feed->spot_availability  }}</span>
-                </div>
-                <div class="col mb-2">
-                    <span class="d-block">Current Team</span>
-                </div>
-            </div>
         </div>
     </div>
     <div class="card-body">
-        <div class="d-flex justify-content-between">
+        <div class="d-flex ">
             <div>
                 <span class="fs-6 fw-light text-muted"> 
                     <span class="d-block">Posted</span>
                     <span class="fas fa-clock"> </span>
                     {{ $feed->created_at->diffForHumans() }}
+                </span>
+            </div>
+            <div class="ms-5">
+                <span class="fs-6 fw-light text-muted"> 
+                    <span class="d-block mb-1">Comments</span>
+                    <a class="dropdown-item" href="{{ route('feeds.show', $feed->id) }}">
+                        <span class="fas fa-comment"> </span>
+                        {{ $feed->comments()->count() }}
+                    </a>
                 </span>
             </div>
         </div>

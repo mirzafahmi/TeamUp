@@ -1,0 +1,23 @@
+:root {
+    --primary-teamup: rgba(255, 255, 255, 0.55);
+    --primary-shade-teamup: #FAF9F6;
+    --secondary-teamup: #06142e;
+    --secondary-shade-teamup: #000;
+    --accent-teamup: #f1916d;
+    --accent-shade-teamup: #ee7c51;
+}
+
+li .dropdown-item:hover {
+    background-color: wheat !important;
+}
+
+.unread {
+    background-color: rgb(223, 191, 132);
+    color: black
+}
+
+.text-wrap {
+    max-width: 200px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}

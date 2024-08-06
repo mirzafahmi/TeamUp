@@ -20,12 +20,25 @@
                     {{ $comment->created_at->diffForHumans() }}
                 </small>
             </div>
-            <p class="fs-6 mt-2 fw-light">
-                {{ $comment->content }}
-            </p>
+            <div class="fs-6 mt-2 fw-light">
+                <p class="mb-0 ps-1">
+                    {{ $comment->content }}
+                </p>
+                @if($comment->playRole)
+                    <span class="badge text-bg-primary">
+                        {{ $comment->playRole->name }}
+                    </span>
+                    <span class="badge text-bg-{{$comment->joinStatus->bootstrap_tag}}">
+                        {{ $comment->joinStatus->name }}
+                    </span>
+                @endif
+            </div>
         </div>
         @include('components.comments-settings-dropdown')
     </div>
+    @if ($comment->request_to_join)
+        @include('comments.shared.process-request-modal', ['comment' => $comment])
+    @endif
     @include('comments.edit', ['comment' => $comment])
 @empty
     <p class="text-center mt-3">No Comments Found.</p>

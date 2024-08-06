@@ -13,7 +13,21 @@
                 </form>
             </li>
         @else
-            <li><a class="dropdown-item" href="">Report</a></li>
+            @if($comment->request_to_join)
+                <li 
+                    class="dropdown-item" 
+                    style="cursor: pointer;"
+                    data-bs-toggle="modal" 
+                    data-bs-target="#processRequest{{$comment->id}}"
+                >
+                    Process Request
+                </li>
+            @endif
+            <li>
+                <a class="dropdown-item" href="">
+                    Report
+                </a>
+            </li>
         @endcan
     </ul>
 </div>

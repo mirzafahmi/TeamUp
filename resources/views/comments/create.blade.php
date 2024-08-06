@@ -28,14 +28,11 @@
                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                 <textarea name="content" class="fs-6 form-control" rows="1"></textarea>
                 @if(auth()->user()->id != $feed->user->id )
-                <div class="d-flex mt-2">
-                    <input class="me-2" type="checkbox" id="requestToJoin" name="request_to_join">
-                    <label class="fs-6 text-muted" for="requestToJoin">Request to join</label>
-                </div>
+                    @livewire('request-to-join', ['feedId' => $feed->id])
                 @endif
             </div>
             <div>
-                <button type="submit" class="btn btn-primary btn-sm"> Post Comment </button>
+                <button type="submit" class="btn btn-dark btn-sm"> Post Comment </button>
             </div>
         </form>
     </div>

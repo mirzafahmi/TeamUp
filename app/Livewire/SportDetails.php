@@ -10,7 +10,7 @@ use App\Models\Sport;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
-class GameModeRole extends Component
+class SportDetails extends Component
 {
     public $sportId;
     public $levelId;
@@ -20,6 +20,8 @@ class GameModeRole extends Component
 
     public $feed;
     public $editing = false;
+
+    public $roleSets = [];
 
     #[Computed()]
     public function sports()
@@ -60,14 +62,27 @@ class GameModeRole extends Component
             $this->sportId = $feed->sport_id;
             $this->levelId = $feed->play_level_id;
             $this->modeId = $feed->play_mode_id;
-            $this->roleId = $feed->play_role_id;
             $this->locationId = $feed->event_location_id;
-        }
+
+            foreach ($feed->playRoles as $playRole) {
+                $this->roleSets[] = [
+                    'role' => $playRole->id,
+                    'spot' => $playRole->pivot->spot_availability
+                ];
+            }
+        } else {
+            $this->roleSets[] = ['role' => null, 'spot' => null];
+        }    
     }
 
+    public function addRoleSet()
+    {
+        $this->roleSets[] = ['role' => null, 'spot' => null];
+    }
+    
     public function render()
     {
-        return view('livewire.game-mode-role', [
+        return view('livewire.sport-details', [
             'sports' => $this->sports(),
             'levels' => $this->levels(),
             'modes' => $this->modes(),

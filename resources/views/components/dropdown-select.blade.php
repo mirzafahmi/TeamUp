@@ -9,7 +9,7 @@
     'editing' => false,
 ])
 
-<div class="form-floating mb-2">
+<div class="form-floating mt-2">
     <select 
         id="{{ $id }}" 
         wire:model.live="{{ $model }}" 

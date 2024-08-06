@@ -27,11 +27,13 @@
                 <input type="hidden" name="feed_id" value="{{ $comment->feed->id }}">
                 <input type="hidden" name="user_id" value="{{ $comment->user->id }}">
                 <textarea name="content" class="fs-6 form-control" rows="1">{{ $comment->content }}</textarea>
-                @if($comment->user->id != $feed->user->id )
-                <div class="d-flex mt-2">
-                    <input class="me-2" type="checkbox" id="requestToJoin{{ $comment->id}}" name="request_to_join" {{ $comment->request_to_join ? 'checked' : '' }}>
-                    <label class="fs-6 text-muted" for="requestToJoin{{ $comment->id}}">Request to join</label>
-                </div>
+                @if(auth()->user()->id != $feed->user->id )
+                @livewire('request-to-join', [
+                        'feedId' => $feed->id, 
+                        'showRoleDropdown' => $comment->request_to_join, 
+                        'selectedRole' => $comment->play_role_id, 
+                        'editing' => true
+                    ])
                 @endif
             </div>
             <div>

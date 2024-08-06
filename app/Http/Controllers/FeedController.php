@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Feed;
+use App\Models\FeedPlayRole;
 use App\Models\User;
 use App\Services\BadgeService;
 use Carbon\Carbon;
@@ -46,8 +47,8 @@ class FeedController extends Controller
             'sport_id' => 'required|exists:sports,id',
             'play_level_id' => 'required|exists:play_levels,id',
             'play_mode_id' => 'required|exists:play_modes,id',
-            'play_role_id' => 'required|exists:play_roles,id',
-            'spot_availability' => 'required|numeric|min:1',
+            'play_role_id' => 'array', 
+            'spot_availability' => 'array',
             'content' => 'required|min:1',
             'event_location_id' => 'required',
             'event_date' => 'required|date_format:Y-m-d\TH:i',
@@ -57,7 +58,22 @@ class FeedController extends Controller
         $validated['event_date'] = Carbon::createFromFormat('Y-m-d\TH:i', $validated['event_date'])
             ->format('Y-m-d H:i:s');
 
-        Feed::create($validated);
+        $feed = Feed::create($validated);
+
+        $playRoleIds = $validated['play_role_id'];
+        $spotAvailabilities = $validated['spot_availability'];
+
+        foreach ($playRoleIds as $index => $roleId) {
+            if ($roleId === null || !isset($spotAvailabilities[$index]) || $spotAvailabilities[$index] === null) {
+                continue;
+            }
+    
+            FeedPlayRole::create([
+                'feed_id' => $feed->id,
+                'play_role_id' => $roleId,
+                'spot_availability' => $spotAvailabilities[$index]
+            ]);
+        }
 
         $this->badgeService->checkAndAssignBadges($validated['user_id']);
 
@@ -78,8 +94,8 @@ class FeedController extends Controller
             'sport_id' => 'required|exists:sports,id',
             'play_level_id' => 'required|exists:play_levels,id',
             'play_mode_id' => 'required|exists:play_modes,id',
-            'play_role_id' => 'required|exists:play_roles,id',
-            'spot_availability' => 'required|numeric|min:1',
+            'play_role_id' => 'array', 
+            'spot_availability' => 'array',
             'content' => 'required|min:1',
             'event_location_id' => 'required',
             'event_date' => 'required|date_format:Y-m-d\TH:i',
@@ -90,6 +106,18 @@ class FeedController extends Controller
             ->format('Y-m-d H:i:s');
 
         $feed->update($validated);
+
+        $playRoleIds = $validated['play_role_id'];
+        $spotAvailabilities = $validated['spot_availability'];
+
+        $pivotData = [];
+        foreach ($playRoleIds as $index => $roleId) {
+            if ($roleId !== null && isset($spotAvailabilities[$index]) && $spotAvailabilities[$index] !== null) {
+                $pivotData[$roleId] = ['spot_availability' => $spotAvailabilities[$index]];
+            }
+        }
+
+        $feed->playRoles()->sync($pivotData);
 
         return redirect()->route('feeds.show', $feed->id)
             ->with('success', 'Your TeamUp Feed updated successfully!');

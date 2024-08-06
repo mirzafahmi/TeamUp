@@ -20,7 +20,7 @@ class SportSeeder extends Seeder
         $sportDetails = [
             ['name' => 'Football', 'category' => 'Sports', 'image_format' => '.jpeg'], 
             ['name' => 'Volleyball', 'category' => 'Sports', 'image_format' => '.jpeg'],  
-            ['name' =>'Dota 2', 'category' => 'Ssports', 'image_format' => '.png'], 
+            ['name' =>'Dota 2', 'category' => 'eSports', 'image_format' => '.png'], 
             ['name' =>'Gray Zone Warfare', 'category' => 'eSports', 'image_format' => '.jpg'], 
         ];
 

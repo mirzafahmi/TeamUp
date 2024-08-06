@@ -13,6 +13,8 @@
     <link href="https://bootswatch.com/5/lux/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
     <script src="https://kit.fontawesome.com/25d6682bc0.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/css/main.css">
     
     <title>{{ config('app.name') }} | @yield('title')</title>
 </head>

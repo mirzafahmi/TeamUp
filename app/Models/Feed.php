@@ -15,8 +15,6 @@ class Feed extends Model
         'sport_id',
         'play_level_id',
         'play_mode_id',
-        'play_role_id',
-        'spot_availability',
         'content',
         'event_location_id',
         'user_id',
@@ -45,6 +43,11 @@ class Feed extends Model
     public function playRole()
     {
         return $this->belongsTo(PlayRole::class);
+    }
+
+    public function playRoles()
+    {
+        return $this->belongsToMany(PlayRole::class, 'feed_play_roles')->withPivot('spot_availability', 'created_at', 'updated_at')->withTimestamps();
     }
 
     public function sport()

@@ -23,6 +23,9 @@
                 @endguest
                 @auth()
                     <li class="nav-item d-flex align-items-center">
+                        @livewire('notification-dropdown')
+                    </li>
+                    <li class="nav-item d-flex align-items-center">
                         <a class="nav-link" href="{{ route('profile') }}"> 
                             <i class="fa-solid fa-user me-1"></i>
                             Profile 

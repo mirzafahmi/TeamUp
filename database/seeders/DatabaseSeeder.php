@@ -23,10 +23,12 @@ class DatabaseSeeder extends Seeder
                 PlayLevelSeeder::class,
                 PlayModeSeeder::class,
                 PlayRoleSeeder::class,
+                JoinStatusSeeder::class,
                 FeedSeeder::class,
-                CommentSeeder::class,
-                PreferredSportSeeder::class,
-                FollowerSeeder::class,
+                FeedPlayRoleSeeder::class,
+                //CommentSeeder::class,
+                //PreferredSportSeeder::class,
+                //FollowerSeeder::class,
             ]
         );
     }

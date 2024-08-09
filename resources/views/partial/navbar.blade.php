@@ -1,13 +1,18 @@
 <nav class="navbar navbar-expand-lg bg-dark border-bottom border-bottom-dark ticky-top bg-body-tertiary"
     data-bs-theme="dark">
     <div class="container">
-        <a class="navbar-brand fw-light" href="{{ route('index') }}"><span class="fa-solid fa-vr-cardboard me-2">
-            </span>TeamUp</a>
+        <a class="navbar-brand fw-light" href="{{ route('index') }}">
+            <span class="fa-solid fa-vr-cardboard me-2"></span>
+            TeamUp
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            @auth()
+                @livewire('search-dropdown')
+            @endauth
             <ul class="navbar-nav">
                 @guest
                     <li class="nav-item">

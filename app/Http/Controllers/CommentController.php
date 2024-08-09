@@ -35,7 +35,7 @@ class CommentController extends Controller
             'join_status_id' => 'required|exists:join_statuses,id',
             'is_read' => 'required'
         ]);
-        //dd($validated);
+
         Comment::create($validated);
 
         $this->badgeService->checkAndAssignBadges($validated['user_id']);

@@ -44,6 +44,27 @@
                 
                 <div class="col mb-2">
                     <span class="d-block">Current Team</span>
+                    <div class="">
+                        @foreach ($feed->comments->filter(function($comment) {
+                                return $comment->request_to_join && $comment->joinStatus->name === 'Approved';
+                            }) as $comment)
+                                <span 
+                                    class="d-inline-block" 
+                                    tabindex="0" 
+                                    data-bs-toggle="popover" 
+                                    data-bs-trigger="hover focus" 
+                                    data-bs-placement="bottom"
+                                    data-bs-content="&#64;{{ $comment->user->username }}"
+                                >   
+                                    <a href="{{ route('users.show', $comment->user->id) }}">
+                                        <img style="width:30px" class="avatar-sm rounded-circle"
+                                            src="{{ $comment->user->getImageURL()}}" 
+                                            alt="{{ $comment->user->username }}"
+                                        >
+                                    </a>
+                                </span>
+                        @endforeach
+                    </div>
                 </div>
             </div>
             @foreach ( $feed->playRoles as $role)
@@ -66,7 +87,28 @@
                 
                 <div class="col mb-2">
                     <span class="d-block">Event Location</span>
-                    <span>{{ $feed->eventLocation->name}}</span>
+                    <span 
+                        class="d-inline-block" 
+                        tabindex="0" 
+                        data-bs-toggle="popover" 
+                        data-bs-trigger="hover focus" 
+                        data-bs-placement="bottom"
+                        data-bs-content="View in Google Map"
+                    > 
+                        <a href="{{ $feed->eventLocation->map_link}}" class="p-1" target="_blank">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </a>
+                    </span>
+                    <span 
+                        class="d-inline-block" 
+                        tabindex="0" 
+                        data-bs-toggle="popover" 
+                        data-bs-trigger="hover focus" 
+                        data-bs-placement="bottom"
+                        data-bs-content="View Details"
+                    > 
+                        <a href="{{ route('event-locations.show', $feed->eventLocation->id) }}">{{$feed->eventLocation->name}}</a>
+                    </span>
                 </div>
             </div>
         </div>

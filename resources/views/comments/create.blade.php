@@ -27,6 +27,9 @@
                 <input type="hidden" name="feed_id" value="{{ $feed->id }}">
                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                 <textarea name="content" class="fs-6 form-control" rows="1"></textarea>
+                @error('content')
+                    <span class="d-block fs-6 text-danger mt-2"> {{ $message }} </span>
+                @enderror
                 @if(auth()->user()->id != $feed->user->id )
                     @livewire('request-to-join', ['feedId' => $feed->id])
                 @endif

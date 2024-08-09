@@ -36,14 +36,19 @@ class PreferredSportEdit extends Component
 
     public function deletePreferredSport($preferredSportId)
     {
-        PreferredSport::find($preferredSportId)->delete();
+        $preferredSport = PreferredSport::where('sport_id', $preferredSportId)
+                                    ->where('user_id', $this->user->id)
+                                    ->first();
+
+        $preferredSport->delete();
+        
         $this->loadSports();
     }
 
     protected function loadSports()
     {
-        $preferredSportIds = $this->user->preferredSports->pluck('sport_id')->toArray();
-
+        $preferredSportIds = $this->user->preferredSports()->pluck('sport_id')->toArray();
+        
         $this->availableSports = Sport::whereNotIn('id', $preferredSportIds)->get();
         $this->preferredSports = $this->user->preferredSports()->get();
     }

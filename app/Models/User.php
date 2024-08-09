@@ -81,11 +81,38 @@ class User extends Authenticatable
 
     public function preferredSports()
     {
-        return $this->hasMany(PreferredSport::class);
+        return $this->belongsToMany(Sport::class, 'preferred_sports', 'user_id', 'sport_id')->withTimestamps();
     }
+
 
     public function badges()
     {
         return $this->belongsToMany(Badge::class, 'user_badges')->withTimestamps();
+    }
+
+    public function mutualFollowers()
+    {
+        $authUserId = auth()->id();
+
+        return $this->followers()
+            ->whereIn('follower_id', function ($query) use ($authUserId) {
+                $query->select('follower_id')
+                    ->from('followers')
+                    ->where('user_id', $authUserId);
+            })
+            ->where('follower_id', '!=', $authUserId);
+    }
+
+    public function mutualFollowings()
+    {
+        $authUserId = auth()->id();
+
+        return $this->followings()
+            ->whereIn('user_id', function ($query) use ($authUserId) {
+                $query->select('user_id')
+                    ->from('followers')
+                    ->where('follower_id', $authUserId);
+            })
+            ->where('user_id', '!=', $authUserId);
     }
 }

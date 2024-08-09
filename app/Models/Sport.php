@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Sport extends Model
 {
@@ -15,6 +16,11 @@ class Sport extends Model
         'image',
         'category_id'
     ];
+
+    public function getImageURL()
+    {
+        return url('storage/' . $this->image);
+    }
 
     public function category()
     {
@@ -38,5 +44,27 @@ class Sport extends Model
     public function feed()
     {
         return $this->hasMany(Feed::class);
+    }
+
+    public function preferredByUsers()
+    {
+        return $this->hasMany(PreferredSport::class);
+    }
+
+    public function preferredByMutualFollowings()
+    {
+        $authUserId = Auth::id();
+
+        return $this->hasManyThrough(User::class, PreferredSport::class, 'sport_id', 'id', 'id', 'user_id')
+            ->whereIn('users.id', function ($query) use ($authUserId) {
+                $query->select('user_id')
+                    ->from('followers')
+                    ->whereIn('user_id', function ($innerQuery) use ($authUserId) {
+                        $innerQuery->select('user_id')
+                            ->from('followers')
+                            ->where('follower_id', $authUserId);
+                    });
+            })
+            ->where('user_id', '!=', $authUserId);
     }
 }

@@ -1,12 +1,12 @@
 <div class="mb-2">
     <x-dropdown-select
         id="sportSelect"
-        model="sportId"
+        modelLive="sportId"
         name="sport_id"
         placeholder="Select Sports"
         :options="$sports"
         label="Sports List"
-        :oldValue="$sportId"
+        oldValue="old('sport_id', $sportId)"
         :editing="$editing"
     />
 
@@ -17,7 +17,7 @@
         placeholder="Select Levels"
         :options="$levels"
         label="Levels List"
-        :oldValue="$levelId"
+        :oldValue="old('play_level_id', $levelId)"
         :editing="$editing"
     />
 
@@ -28,7 +28,7 @@
         placeholder="Select Modes"
         :options="$modes"
         label="Modes List"
-        :oldValue="$modeId"
+        :oldValue="old('play_mode_id', $modeId)"
         :editing="$editing"
     />
 
@@ -43,15 +43,15 @@
                     :options="$roles"
                     label="Roles List"
                     :editing="$editing"
+                    oldValue="{{ old('play_role_id.'.$index, $set['role']) }}"
                 />
             </div>
-            
             <div class="flex-grow-1 ms-1">
                 <x-spot-availability-input
                     id="spotAvailability{{ $index }}"
                     model="roleSets.{{ $index }}.spot"
                     name="spot_availability[]"
-                    :value="$set['spot']"
+                    value="{{ old('spot_availability.'.$index, $set['spot']) }}"
                 />
             </div>
         </div>
@@ -70,7 +70,7 @@
                 placeholder="Select Event Location"
                 :options="$locations"
                 label="Event Location List"
-                :oldValue="$locationId"
+                :oldValue="old('event_location_id', $locationId)"
                 :editing="$editing"
             />
         </div>

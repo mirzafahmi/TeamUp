@@ -5,9 +5,9 @@
 @section('middle-content')
     @auth()
         @include('feeds.create')
-        <hr>
+        <hr class="my-3">
     @endauth()
-    <div class="my-3">
+    <div class="">
         @livewire('feed-tabs')
     </div>
 @endsection

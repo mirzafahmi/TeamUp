@@ -3,10 +3,12 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\EventLocationController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\PlayLevelController;
 use App\Http\Controllers\PlayModeController;
 use App\Http\Controllers\PlayRoleController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SportCategoryController;
 use App\Http\Middleware\CheckOwner;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +35,10 @@ Route::resource('feeds', FeedController::class)->middleware(['auth', CheckOwner:
 Route::resource('feeds', FeedController::class)->only('show');
 
 Route::resource('comments', CommentController::class)->only('store', 'update', 'destroy')->middleware('auth');
+
+Route::resource('event-locations', EventLocationController::class)->only('show')->middleware('auth');
+
+Route::get('/search', [SearchController::class, 'show'])->name('search.results');
 
 // Route::middleware(['auth', 'can:admin-access'])->prefix('/admin')->as('admin.')->group(function () {
 //     Route::get('/', [AdminController::class, 'index'])->name('index');

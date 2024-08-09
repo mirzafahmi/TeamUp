@@ -1,8 +1,8 @@
 <div class="d-flex justify-content-start">
-    <a href="#" class="fw-light nav-link fs-6 me-2" data-bs-toggle="modal" data-bs-target="#followerModal"> 
+    <a href="#" class="fw-light nav-link fs-6 me-2" data-bs-toggle="modal" data-bs-target="#followerModal{{$user->id}}"> 
         {{ $user->followers()->count() }} followers 
     </a>
-    <a href="#" class="fw-light nav-link fs-6 me-3" data-bs-toggle="modal" data-bs-target="#followingModal"> 
+    <a href="#" class="fw-light nav-link fs-6 me-3" data-bs-toggle="modal" data-bs-target="#followingModal{{$user->id}}"> 
         {{ $user->followings()->count() }} followings 
     </a>
     <a href="#" class="fw-light nav-link fs-6 me-3"> 

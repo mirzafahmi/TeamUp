@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Feed;
 use App\Models\FeedPlayRole;
+use App\Models\Sport;
 use App\Models\User;
 use App\Services\BadgeService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FeedController extends Controller
 {
@@ -26,7 +28,14 @@ class FeedController extends Controller
                     ->orderBy('created_at', 'DESC')
                     ->paginate(5);
 
-        return view('index', compact('feeds', 'editing'));
+        $sports = Sport::whereDoesntHave('preferredByUsers', function ($query) {
+            $query->where('user_id', Auth::id());
+        })
+        ->withCount('preferredByUsers')
+        ->orderBy('preferred_by_users_count', 'desc')
+        ->get();
+
+        return view('index', compact('feeds', 'editing', 'sports'));
     }
 
     public function show(Request $request, Feed $feed)
@@ -47,21 +56,35 @@ class FeedController extends Controller
             'sport_id' => 'required|exists:sports,id',
             'play_level_id' => 'required|exists:play_levels,id',
             'play_mode_id' => 'required|exists:play_modes,id',
-            'play_role_id' => 'array', 
-            'spot_availability' => 'array',
+            'play_role_id' => 'required|array|min:1', 
+            'play_role_id.*' => 'nullable|exists:play_roles,id',
+            'spot_availability' => 'required|array|min:1',
+            'spot_availability.*' => 'nullable|integer|min:1',
             'content' => 'required|min:1',
             'event_location_id' => 'required',
             'event_date' => 'required|date_format:Y-m-d\TH:i',
         ]);
+        
+        $playRoleIds = $validated['play_role_id'] ?? [];
+        $spotAvailabilities = $validated['spot_availability'] ?? [];
+        
+        if (count($playRoleIds) === 1 && is_null($playRoleIds[0])) {
+            return back()->withErrors(['play_role_id' => 'Play Role ID cannot be null if provided.'])
+                         ->withInput();
+        }
+    
+        if (count($spotAvailabilities) === 1 && is_null($spotAvailabilities[0])) {
+            return back()->withErrors(['spot_availability' => 'Spot Availability cannot be null if provided.'])
+                         ->withInput();
+        }
+
+        //dd(count($playRoleIds) === 1 && is_null($playRoleIds[0]));
 
         $validated['user_id'] = auth()->user()->id;
         $validated['event_date'] = Carbon::createFromFormat('Y-m-d\TH:i', $validated['event_date'])
             ->format('Y-m-d H:i:s');
 
         $feed = Feed::create($validated);
-
-        $playRoleIds = $validated['play_role_id'];
-        $spotAvailabilities = $validated['spot_availability'];
 
         foreach ($playRoleIds as $index => $roleId) {
             if ($roleId === null || !isset($spotAvailabilities[$index]) || $spotAvailabilities[$index] === null) {

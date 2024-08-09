@@ -4,7 +4,7 @@
         <form action="{{ route('feeds.store') }}" method="post" class="d-grid">
             @csrf
             <div class="mb-3">
-                <textarea name="content" class="form-control" id="content" rows="3"></textarea>
+                <textarea name="content" class="form-control @error('content') is-invalid @enderror" id="content" rows="3">{{ old('content') }}</textarea>
                 @error('content')
                     <span class="d-block fs-6 text-danger mt-2"> {{ $message }} </span>
                 @enderror

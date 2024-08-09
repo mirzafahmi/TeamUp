@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('event_locations', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->string('address')->nullable();
-            $table->string('map_link')->nullable();
+            $table->text('address')->nullable();
+            $table->text('map_link')->nullable();
             $table->timestamps();
         });
     }

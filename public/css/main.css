@@ -21,3 +21,8 @@ li .dropdown-item:hover {
     word-break: break-word;
     overflow-wrap: break-word;
 }
+
+.navbar-nav .nav-item {
+    margin-right: 0px;
+    margin-left: 2rem;
+}

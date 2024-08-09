@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 class UserController extends Controller
 {
     public function show(User $user)
-    {
+    {   
         $feeds = $user->feeds()->orderBy('created_at', 'DESC')->paginate(5);
         $sports = $user->preferredSports()->get();
         $followers = $user->followers()->get();

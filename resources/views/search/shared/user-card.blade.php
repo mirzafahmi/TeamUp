@@ -1,17 +1,19 @@
 <div class="card mb-5">
-    <div class="px-3 pt-4 pb-2">
+    <div class="p-3">
         <div class="d-flex align-items-center justify-content-between position-relative">
             <div class="d-flex align-items-center">
                 <img 
-                    style="width:150px" 
+                    style="width:75px" 
                     class="me-3 avatar-sm rounded-circle" 
                     src="{{ $user->getImageURL() }}"
                     alt="Profile Avatar"
                 >
                 <div id="profile-details">
-                    <h3 class="card-title mb-0">
-                        {{ $user->name }}
-                    </h3>
+                    <h4 class="card-title mb-0">
+                        <a href="{{ route('users.show', $user->id)}}">
+                            {{ $user->name }}
+                        </a>
+                    </h4>
                     <span class="fs-6 text-muted">
                         &#64;{{ $user->username}} 
                     </span>
@@ -38,16 +40,7 @@
         </div>
         <div class="row px-3">
             <div class="col px-2 mt-4">
-                <h5 class="fs-5"> Bio : </h5>
-                <p class="fs-6 fw-light">
-                    {{ $user->bio }}
-                </p>
-            </div>
-        </div>
-        <div class="row px-3">
-            <div class="col px-2 mt-4">
-                <h5 class="fs-5"> Prefered Sports : </h5>
-                <p class="fs-6 fw-light">
+                <h6 class="fs-6"> Prefered Sports : </h6>
                     @forelse($user->preferredSports as $preferredSport)
                         <div class="me-2 d-inline">
                             <span 
@@ -59,7 +52,7 @@
                                 data-bs-content="{{ $preferredSport->name }}"
                             >
                                 <img 
-                                    style="width:50px; height: 50px;" 
+                                    style="width:30px; height: 30px;" 
                                     class="avatar-sm rounded-circle" 
                                     src="{{ $preferredSport->getImageURL() }}"
                                     alt="{{ $preferredSport->name }}"
@@ -69,38 +62,30 @@
                     @empty
                         No preferred sports yet
                     @endforelse
-                </p>
             </div>
-            <div class="col px-2 mt-4">
-                <h5 class="fs-5">
-                    Badges : 
-                </h5>
-                <p class="fs-6 fw-light">
-                @forelse($user->badges as $badge)
-                    <div class="me-2 d-inline">
-                        <span 
-                            class="d-inline-block" 
-                            tabindex="0" 
-                            data-bs-toggle="popover" 
-                            data-bs-trigger="hover focus" 
-                            data-bs-placement="bottom"
-                            data-bs-content="{{ $badge->name }}"
-                            >
-                                <img 
-                                    style="width:50px; height: 50px;" 
-                                    class="me-2 avatar-sm rounded-circle" 
-                                    src="{{ $badge->getImageURL() }}"
-                                    alt="{{ $badge->name }}"
-                                >
-                        </span>
-                    </div>
-                @empty
-                    No badges yet
-                @endforelse
-                </p>
-            </div>
+            <x-rounded-circle-display 
+                title="Mutual Followers"
+                :details="$user->mutualFollowers->take(3)"    
+                routeName="users.show"
+                emptyTitle="No mutual followers found"
+                :count="$user->mutualFollowers->count()"
+                modal="true"
+                modalName="mutualFollowers"
+                :user="$user"
+            />
+            <x-rounded-circle-display 
+                title="Mutual Followings"
+                :details="$user->mutualFollowings->take(3)"
+                routeName="users.show"
+                emptyTitle="No mutual followings found"
+                :count="$user->mutualFollowings->count()"
+                modal="true"
+                modalName="mutualFollowings"
+                :user="$user"
+            />
         </div>
     </div>
-    @include('users.shared.follower-modal')
-    @include('users.shared.following-modal')
+    @include('users.shared.follower-modal', ['user' => $user, 'followers' => $user->followers])
+    @include('users.shared.following-modal', ['user' => $user, 'followings' => $user->followings])
+    @include('users.shared.mutual-following-modal', ['user' => $user])
 </div>

@@ -1,13 +1,14 @@
 <div class="dropdown">
     <a
-        class="nav-link" 
+        class="nav-link position-relative" 
         type="button" 
         id="dropdownMenuButton" 
         data-bs-toggle="dropdown" 
         aria-expanded="false"
     >
         <i class="fa-solid fa-bell"></i>
-        <span class="badge bg-danger">
+        <span class="position-absolute translate-middle badge rounded-pill bg-danger"
+            style="left:90%;">
             {{ $unreadCount }}
         </span>
     </a>

@@ -16,7 +16,7 @@
                     style="width:50px; height: 50px;" 
                     class="me-2 avatar-sm rounded-circle" 
                     src="{{ $preferredSport->getImageURL() }}"
-                    alt="{{ $preferredSport->sports->name }}"
+                    alt="{{ $preferredSport->name }}"
                 >
                 <button type="button" class="btn btn-danger position-absolute top-0 end-0"
                     wire:click="deletePreferredSport({{ $preferredSport->id }})"

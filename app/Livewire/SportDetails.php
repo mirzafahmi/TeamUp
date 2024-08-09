@@ -71,7 +71,25 @@ class SportDetails extends Component
                 ];
             }
         } else {
-            $this->roleSets[] = ['role' => null, 'spot' => null];
+            $this->sportId = old('sport_id', $this->sportId);
+            $this->levelId = old('play_level_id', $this->levelId);
+            $this->modeId = old('play_mode_id', $this->modeId);
+            $this->locationId = old('event_location_id', $this->locationId);
+            
+            $roleIds = old('play_role_id', []);
+            $spotAvailabilities = old('spot_availability', []);
+
+            $this->roleSets = array_map(function($roleId, $spot) {
+                return [
+                    'role' => $roleId,
+                    'spot' => $spot,
+                ];
+            }, $roleIds, $spotAvailabilities);
+
+            // Add empty sets if needed
+            if (empty($this->roleSets)) {
+                $this->roleSets[] = ['role' => null, 'spot' => null];
+            }
         }    
     }
 

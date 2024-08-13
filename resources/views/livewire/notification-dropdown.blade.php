@@ -7,10 +7,14 @@
         aria-expanded="false"
     >
         <i class="fa-solid fa-bell"></i>
-        <span class="position-absolute translate-middle badge rounded-pill bg-danger"
-            style="left:90%;">
-            {{ $unreadCount }}
-        </span>
+        @if (session('is_mobile'))
+            Notification
+        @else
+            <span class="position-absolute translate-middle badge rounded-pill bg-danger"
+                style="left:90%;">
+                {{ $unreadCount }}
+            </span>
+        @endif
     </a>
     <ul class="dropdown-menu border-2 bg-light" aria-labelledby="dropdownMenuButton">
         @forelse($notifications as $notification)

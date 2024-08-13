@@ -1,7 +1,12 @@
-@extends('layout.desktop')
+@extends('layout.base')
 
 @section('content')
 
-@include('users.shared.profile_card_edit')
+@if (session('is_mobile'))
+    @include('users.shared.profile-card-edit-mobile')
+@else
+    @include('users.shared.profile-card-edit')
+@endif
+
 
 @endsection

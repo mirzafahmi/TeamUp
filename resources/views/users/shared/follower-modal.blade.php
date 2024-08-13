@@ -15,11 +15,13 @@
 				@forelse($followers as $intendedUser)
 					@include('users.shared.follower-following-list', $intendedUser)
 				@empty
+					@auth()
 					@if (auth()->user()->id == $user->id)
 						You dont have follower yet
 					@else
 						{{ $user->name }} dont have follower yet
 					@endif
+					@endauth
 				@endforelse
 			</div>
 			<div class="modal-footer">    

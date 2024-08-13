@@ -10,9 +10,6 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            @auth()
-                @livewire('search-dropdown')
-            @endauth
             <ul class="navbar-nav">
                 @guest
                     <li class="nav-item">
@@ -27,6 +24,9 @@
                     </li>
                 @endguest
                 @auth()
+                    <li class="nav-item">
+                        @livewire('search-dropdown')
+                    </li>
                     <li class="nav-item d-flex align-items-center">
                         @livewire('notification-dropdown')
                     </li>
@@ -36,7 +36,7 @@
                             Profile 
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item d-flex align-items-center">
                         <form action="{{ route('logout') }}" method="POST" class="">
                             @csrf
                             <button class="nav-link btn btn-link" type="submit"> 

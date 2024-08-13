@@ -1,4 +1,4 @@
-@forelse ($feed->comments as $comment)
+@forelse ($comments as $comment)
     <div class="d-flex align-items-start p-3">
         <img style="width:35px" class="me-2 avatar-sm rounded-circle"
             src="{{ $comment->user->getImageURL()}}" 

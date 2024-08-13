@@ -19,7 +19,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Feed::class, 'feed_id')->constrained()->onDelete('cascade');
             $table->foreignIdFor(User::class, 'user_id')->constrained()->onDelete('cascade');
-            $table->string('content')->nullable();
+            $table->text('content')->nullable();
             $table->boolean('request_to_join')->default(false);
             $table->foreignIdFor(PlayRole::class, 'play_role_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignUuid('join_status_id')->constrained()->onDelete('cascade');

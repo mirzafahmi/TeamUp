@@ -24,25 +24,22 @@ class FeedController extends Controller
     {
         $editing = false;
 
-        $feeds = Feed::with(['sport', 'playLevel', 'playMode', 'playRole', 'user'])
-                    ->orderBy('created_at', 'DESC')
-                    ->paginate(5);
-
         $sports = Sport::whereDoesntHave('preferredByUsers', function ($query) {
             $query->where('user_id', Auth::id());
         })
         ->withCount('preferredByUsers')
         ->orderBy('preferred_by_users_count', 'desc')
+        ->take(4)
         ->get();
 
-        return view('index', compact('feeds', 'editing', 'sports'));
+        return view('index', compact('editing', 'sports'));
     }
 
     public function show(Request $request, Feed $feed)
     {
-        $feed = $feed->load(['sport', 'playLevel', 'playMode', 'playRole', 'user']);
+        $comments = $feed->comments();
 
-        return view('feeds.show', compact('feed'));
+        return view('feeds.show', compact('feed', 'comments'));
     }
 
     public function create()

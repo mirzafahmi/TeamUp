@@ -9,6 +9,12 @@ class Comment extends Model
 {
     use HasFactory;
 
+    protected $with = [
+        'user',
+        'playRole',
+        'joinStatus'
+    ];
+
     protected $fillable = [
         'feed_id',
         'user_id',

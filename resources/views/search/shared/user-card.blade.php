@@ -1,4 +1,4 @@
-<div class="card mb-5">
+<div class="card mb-3">
     <div class="p-3">
         <div class="d-flex align-items-center justify-content-between position-relative">
             <div class="d-flex align-items-center">
@@ -21,7 +21,10 @@
                         {{ $user->email}} 
                     </span>
                     <div class="mt-3">
-                        @include('users.shared.profile_stats')
+                        @include('users.shared.profile-stats', [
+                            'followers' => $user->followers(), 
+                            'followings' => $user->followings(), 
+                        ])
                     </div>
                 </div>
             </div>
@@ -60,7 +63,7 @@
                             </span>
                         </div>
                     @empty
-                        No preferred sports yet
+                        <span class="fs-6 text-muted p-2">No preferred sports yet</span>
                     @endforelse
             </div>
             <x-rounded-circle-display 

@@ -18,8 +18,19 @@ class SearchDropdown extends Component
 
     public function fetchResults()
     {
+        $query = $this->searchTerm;
+        
+        $feeds = Feed::where('content', 'like', "%{$query}%")
+            ->orwhereHas('user', function ($q) use ($query) {
+                $q->where('username', 'like', "%{$query}%");
+            })
+            ->orWhereHas('sport', function ($q) use ($query) {
+                $q->where('name', 'like', "%{$query}%");
+            })
+            ->limit(5)->get();
+
         return [
-            'feeds' => Feed::where('content', 'like', "%{$this->searchTerm}%")->limit(5)->get(),
+            'feeds' => $feeds,
             'users' => User::where('username', 'like', "%{$this->searchTerm}%")->limit(5)->get()
         ];
     }

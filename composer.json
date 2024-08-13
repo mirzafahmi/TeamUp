@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.2",
         "filament/filament": "^3.2",
+        "jenssegers/agent": "^2.6",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
@@ -15,6 +16,7 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.13",
         "fakerphp/faker": "^1.23",
+        "fly-apps/dockerfile-laravel": "^1.0",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.6",

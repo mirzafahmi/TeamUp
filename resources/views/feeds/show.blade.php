@@ -1,4 +1,4 @@
-@extends('layout.dashboard')
+@extends('layout.desktop')
 
 @section('title', $feed->content)
 

@@ -9,7 +9,15 @@ class Feed extends Model
 {
     use HasFactory;
 
-    protected $with = ['user:id,name,image,username'];
+    protected $with = [
+        'user:id,name,image,username', 
+        'comments', 
+        'playLevel', 
+        'playMode', 
+        'playRoles', 
+        'sport', 
+        'eventLocation'
+    ];
     
     protected $fillable = [
         'sport_id',

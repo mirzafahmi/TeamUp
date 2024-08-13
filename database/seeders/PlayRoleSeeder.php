@@ -17,10 +17,14 @@ class PlayRoleSeeder extends Seeder
         $sports = Sport::pluck('id', 'name');
 
         $rolesBySport = [
+            'Badminton' => ['Attacker', 'Defender'],
             'Dota 2' => ['Carry', 'Soft-Support', 'Offlane', 'Midlaner', 'Hard-Support'],
             'Football' => ['Forwarder', 'Midfielder', 'Defender', 'Keeper'],
+            'Futsal' => ['Forwarder', 'Midfielder', 'Defender', 'Keeper'],
             'Gray Zone Warfare' => ['sniper', 'cqb'],
-            'Volleyball' => ['Libero', 'Setter', 'Spiker']
+            'Sepak Takraw' => ['Tekong', 'Feeder', 'Striker'],
+            'Volleyball' => ['Libero', 'Setter', 'Spiker'],
+            'World of Warships' => ['Aircraft Carrier', 'Battleship', 'Cruiser', 'Destroyer', 'Submarine'],
         ];
     
         foreach ($rolesBySport as $sportName => $roles) {

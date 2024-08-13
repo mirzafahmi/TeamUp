@@ -1,10 +1,14 @@
-@extends('layout.profile')
+@extends('layout.desktop')
 
 @section('title', $user->name . "'s Profile")
 
 @section('middle-content')
 
-@include('users.shared.profile_card')
+@if (session('is_mobile'))
+    @include('users.shared.profile-card-mobile')
+@else
+    @include('users.shared.profile-card')
+@endif
 
 @forelse($feeds as $feed)
     @include('feeds.shared.feed-card', ['showComment' => false])

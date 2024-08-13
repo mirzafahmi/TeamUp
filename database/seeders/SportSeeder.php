@@ -18,10 +18,14 @@ class SportSeeder extends Seeder
         $categories = Category::pluck('id', 'name')->toArray();
 
         $sportDetails = [
-            ['name' => 'Football', 'category' => 'Sports', 'image_format' => '.jpeg'], 
-            ['name' => 'Volleyball', 'category' => 'Sports', 'image_format' => '.jpeg'],  
+            ['name' =>'Badminton', 'category' => 'Sports', 'image_format' => '.jpg'], 
             ['name' =>'Dota 2', 'category' => 'eSports', 'image_format' => '.png'], 
+            ['name' => 'Football', 'category' => 'Sports', 'image_format' => '.jpeg'], 
+            ['name' => 'Futsal', 'category' => 'Sports', 'image_format' => '.jpg'], 
             ['name' =>'Gray Zone Warfare', 'category' => 'eSports', 'image_format' => '.jpg'], 
+            ['name' => 'Sepak Takraw', 'category' => 'Sports', 'image_format' => '.jpg'], 
+            ['name' => 'Volleyball', 'category' => 'Sports', 'image_format' => '.jpeg'],  
+            ['name' => 'World of Warships', 'category' => 'eSports', 'image_format' => '.jpg'],  
         ];
 
         foreach ($sportDetails as $key => $value){

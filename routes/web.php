@@ -11,10 +11,11 @@ use App\Http\Controllers\PlayRoleController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SportCategoryController;
 use App\Http\Middleware\CheckOwner;
+use App\Http\Middleware\DeviceDetection;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
-Route::get('/', [FeedController::class, 'index'])->name('index');
+Route::get('/', [FeedController::class, 'index'])->name('index')->middleware(DeviceDetection::class);
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/register', [AuthController::class, 'register'])->name('register');
@@ -38,7 +39,7 @@ Route::resource('comments', CommentController::class)->only('store', 'update', '
 
 Route::resource('event-locations', EventLocationController::class)->only('show')->middleware('auth');
 
-Route::get('/search', [SearchController::class, 'show'])->name('search.results');
+Route::get('/search', [SearchController::class, 'show'])->name('search.results')->middleware('auth');
 
 // Route::middleware(['auth', 'can:admin-access'])->prefix('/admin')->as('admin.')->group(function () {
 //     Route::get('/', [AdminController::class, 'index'])->name('index');

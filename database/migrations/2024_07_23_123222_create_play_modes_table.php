@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('play_modes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->foreignIdFor(Sport::class, 'sport_id')->constrained()->onDelete('cascade');
             $table->integer('team_size');
             $table->timestamps();

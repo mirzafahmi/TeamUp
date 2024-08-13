@@ -73,20 +73,6 @@ class FeedResource extends Resource
                             ->preload()
                             ->required(),
                     ]),
-                    Forms\Components\Grid::make(2)
-                    ->schema([
-                        Forms\Components\Select::make('play_role_id')
-                            ->label('Play Role Name')
-                            ->options(fn(Get $get): Collection => PlayRole::query()
-                                ->where('sport_id', $get('sport_id'))
-                                ->pluck('name', 'id'))
-                            ->searchable()
-                            ->preload()
-                            ->required(),
-                        Forms\Components\TextInput::make('spot_availability')
-                            ->required()
-                            ->numeric(),
-                    ]),
                 ]),
                 Forms\Components\Section::make('Event Details')
                     ->description('Enter event details')
@@ -114,12 +100,6 @@ class FeedResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('playMode.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('playRole.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('spot_availability')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('content')

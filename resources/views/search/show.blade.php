@@ -1,4 +1,4 @@
-@extends('layout.dashboard')
+@extends('layout.desktop')
 
 @section('title')
 
@@ -7,7 +7,11 @@
         <h1>Search result for user named "{{ $query }}"</h1>
         <hr>
         @forelse ($users as $user)
-            @include('search.shared.user-card', ['user' => $user])
+            @if (session('is_mobile'))
+                @include('search.shared.user-card-mobile', ['user' => $user])
+            @else
+                @include('search.shared.user-card', ['user' => $user])
+            @endif
         @empty
             <span class="p-1">No user found that named "{{ $query }}"</span>
         @endforelse

@@ -26,3 +26,13 @@ li .dropdown-item:hover {
     margin-right: 0px;
     margin-left: 2rem;
 }
+
+.feed-tab.active {
+    background: linear-gradient(90deg, white, #faf4f4);
+    color: white;
+    border-radius: 5px;
+}
+
+.nav-item:has(> .feed-tab)  {
+    margin-right: 0;
+}

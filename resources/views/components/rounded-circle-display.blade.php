@@ -10,13 +10,13 @@
 ])
 
 
-<div class="col px-2 mt-4">
+<div class="col mt-4">
     <h6 class="fs-6">{{ $title }} : </h6>
     <div class="d-flex">
-        @forelse($details as $detail)
-            <div class="me-2 d-inline">
+        <div class="me-2 d-inline px-1">
+            @forelse($details as $detail)
                 <span 
-                    class="d-inline-block" 
+                    class="d-inline-block pe-1" 
                     tabindex="0" 
                     data-bs-toggle="popover" 
                     data-bs-trigger="hover focus" 
@@ -30,10 +30,10 @@
                         >
                     </a>
                 </span>
-            </div>
-        @empty
-            <span class="fs-6 text-muted p-2">{{ $emptyTitle }}</span>
-        @endforelse
+            @empty
+                <span class="fs-6 text-muted p-2">{{ $emptyTitle }}</span>
+            @endforelse
+        </div>
         @if($count > 1 && $modal)
         <div class="d-flex justify-content-center align-items-center ms-2">
             <a href="#" 

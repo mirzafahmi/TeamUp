@@ -21,12 +21,14 @@ class NotificationDropdown extends Component
         $username = auth()->user()->username;
 
         $mentionedComments = Comment::where('content', 'LIKE', "%@$username%")
+        ->with('joinStatus')
         ->orderBy('created_at', 'desc')
         ->get();
 
         $ownFeedComments = Comment::whereHas('feed', function ($query) {
             $query->where('user_id', auth()->id());
         })
+        ->with('joinStatus')
         ->orderBy('created_at', 'desc')
         ->get();
 

@@ -1,4 +1,4 @@
-@extends('layout.dashboard')
+@extends('layout.desktop')
 
 @section('middle-content')
     @auth()

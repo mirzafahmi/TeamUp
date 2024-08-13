@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignIdFor(Sport::class, 'sport_id')->constrained()->onDelete('cascade');
             $table->foreignIdFor(PlayLevel::class, 'play_level_id')->constrained()->onDelete('cascade');
             $table->foreignIdFor(PlayMode::class, 'play_mode_id')->constrained()->onDelete('cascade');
-            $table->string('content')->nullable();
+            $table->text('content')->nullable();
             $table->foreignUuid('event_location_id')->constrained()->onDelete('cascade');
             $table->foreignIdFor(User::class, 'user_id')->constrained()->onDelete('cascade');
             $table->dateTime('event_date');

@@ -61,8 +61,8 @@
         Add More Roles
     </a>
 
-    <div class="d-flex justify-content-between">
-        <div class="flex-grow-1 me-1">  
+    <div class="d-flex justify-content-between flex-column flex-sm-row">
+        <div class="flex-grow-1 mb-2 mb-sm-0 me-sm-1">  
             <x-dropdown-select
                 id="eventLocationSelect"
                 model="locationId"

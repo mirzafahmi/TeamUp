@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Comment;
+use App\Services\NotificationService;
 use Livewire\Component;
 
 class NotificationDropdown extends Component
@@ -10,34 +11,17 @@ class NotificationDropdown extends Component
     public $notifications = [];
     public $unreadCount = 0;
 
-    public function mount()
+    public function mount(NotificationService $notificationService)
     {
-        $this->loadNotifications();
+        $this->loadNotifications($notificationService);
     }
 
-    public function loadNotifications()
+    public function loadNotifications(NotificationService $notificationService)
     {
         $userId = auth()->id();
         $username = auth()->user()->username;
 
-        $mentionedComments = Comment::where('content', 'LIKE', "%@$username%")
-        ->with('joinStatus')
-        ->orderBy('created_at', 'desc')
-        ->get();
-
-        $ownFeedComments = Comment::whereHas('feed', function ($query) {
-            $query->where('user_id', auth()->id());
-        })
-        ->with('joinStatus')
-        ->orderBy('created_at', 'desc')
-        ->get();
-
-        $combinedComments = $mentionedComments->merge($ownFeedComments);
-
-        $this->notifications = $combinedComments->filter(function ($comment) use ($userId) {
-            return $comment->user_id !== $userId;
-        })->unique('id')->sortByDesc('created_at');
-
+        $this->notifications = $notificationService->getNotifications($userId, $username);
         $this->unreadCount = $this->notifications->where('is_read', false)->count();
     }
 

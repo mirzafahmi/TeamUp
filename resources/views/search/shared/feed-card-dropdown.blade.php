@@ -1,46 +1,44 @@
-<div class="mb-3">
-    <div class="p-3">
-        <div class="d-flex align-items-center justify-content-between position-relative">
-            <div class="d-flex align-items-center">
-                <img 
-                    style="width:75px" 
-                    class="me-3 avatar-sm rounded-circle" 
-                    src="{{ $feed->user->getImageURL() }}"
-                    alt="Profile Avatar"
-                >
-                <div id="profile-details">
-                    <h4 class="card-title mb-0">
-                        <a href="{{ route('users.show', $feed->user->id)}}">
-                            {{ $feed->user->name }}
-                        </a>
-                    </h4>
-                    <span class="fs-6 text-muted">
-                        &#64;{{ $feed->user->username}} 
-                    </span>
-                    <span class="fs-6 text-muted">
-                        {{ $feed->user->email}} 
-                    </span>
-                </div>
-            </div>
-            <div class="position-absolute top-0 end-0">
-                @can('profile-owner', $feed->user)
-
-                @else
-                    @auth()
-                        <livewire:follower-buttons :user="$feed->user" />
-                    @endauth
-                @endcan
+<div class="shadow-sm" style="max-width:600px;">
+    <div class="card-body p-3">
+        <div class="d-flex align-items-center mb-3">
+            <img 
+                style="width:60px; height:60px;" 
+                class="me-3 avatar-sm rounded-circle border" 
+                src="{{ $feed->user->getImageURL() }}"
+                alt="Profile Avatar"
+            >
+            <div>
+                <h5 class="card-title mb-1">
+                    {{ $feed->user->name }}
+                </h5>
+                <p class="mb-0  fs-6">
+                    &#64;{{ $feed->user->username}}
+                </p>
             </div>
         </div>
-        <div>
-            <span>Sport Name</span>
-            {{ $feed->sport->name }}
-            <span>Play Level</span>
-            {{ $feed->playLevel->name }}
-            <span>Play Mode</span>
-            {{ $feed->playMode->name }}
-            <span>Play Role</span>
-            <span>Spot Availability</span>
+        <div class="mb-2">
+            <span class="badge bg-info me-2">{{ $feed->sport->name }}</span>
+            <span class="badge bg-warning me-2">{{ $feed->playLevel->name }}</span>
+            <span class="badge bg-success me-2">{{ $feed->playMode->name }}</span>
+            @foreach ($feed->playRoles as $playRole)
+                <span class="badge bg-dark me-2">
+                    {{ $playRole->name }}: {{ $playRole->pivot->spot_availability}}
+                </span>
+            @endforeach
+        </div>
+        <div class="fs-6">
+            <i class="fa-solid fa-comment me-1"></i>
+            <span class="text-wrap">{{ $feed->content }}</span>
+        </div>
+        <div class=" fs-6">
+            <div>
+                <i class="fa-solid fa-location-dot me-1"></i>
+                {{ $feed->eventLocation->name }}
+            </div>
+            <div>
+                <i class="fa-solid fa-calendar me-1"></i>
+                {{ $feed->event_date->format('M j, Y \a\t g:i A') }}
+            </div>
         </div>
     </div>
 </div>

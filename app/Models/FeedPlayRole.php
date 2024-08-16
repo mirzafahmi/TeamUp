@@ -14,4 +14,14 @@ class FeedPlayRole extends Model
         'play_role_id',
         'spot_availability'
     ];
+
+    public function feed()
+    {
+        return $this->belongsTo(Feed::class);
+    }
+
+    public function playRole()
+    {
+        return $this->belongsTo(PlayRole::class);
+    }
 }

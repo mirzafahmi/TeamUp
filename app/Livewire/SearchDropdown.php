@@ -11,6 +11,8 @@ class SearchDropdown extends Component
     public $searchTerm = '';
     public $results = [];
 
+    public $isFocused = false;
+    
     public function updatedSearchTerm()
     {
         $this->results = $this->fetchResults();
@@ -27,12 +29,18 @@ class SearchDropdown extends Component
             ->orWhereHas('sport', function ($q) use ($query) {
                 $q->where('name', 'like', "%{$query}%");
             })
+            ->orderBy("created_at","desc")
             ->limit(5)->get();
 
         return [
             'feeds' => $feeds,
             'users' => User::where('username', 'like', "%{$this->searchTerm}%")->limit(5)->get()
         ];
+    }
+
+    public function setFocus($value)
+    {
+        $this->isFocused = $value;
     }
 
     public function render()

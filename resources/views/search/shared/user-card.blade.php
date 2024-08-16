@@ -36,7 +36,10 @@
                     </a>
                 @else
                     @auth()
-                        <livewire:follower-buttons :user="$user" />
+                        <livewire:follower-buttons 
+                            :user="$user" 
+                            :key="'follower-buttons-user-card-' . $user->id"
+                        />
                     @endauth
                 @endcan
             </div>

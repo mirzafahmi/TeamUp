@@ -15,11 +15,11 @@ class BadgeSeeder extends Seeder
     {
         $badges = [
             'Getting Started' => 'Created at least 1 feeds',
-            'Veteran' => 'Created at least 50 feeds',
-            'Comunity Leader' => 'Reached at least 50 follower',
-            'Enthusiast' => 'Have more than 4 preferred sports',
-            'Versatile' => 'Played more that 4 roles in any sport',
-            'Social butterfly' => 'Commented at least 50 comments',
+            'Veteran' => 'Created at least 5 feeds',
+            'Community Leader' => 'Reached at least 5 follower',
+            'Enthusiast' => 'Have at least 4 preferred sports',
+            'Versatile' => 'Played at least 4 roles in any sport',
+            'Social Butterfly' => 'Commented at least 5 comments',
         ];
 
         foreach ($badges as $name => $description) 

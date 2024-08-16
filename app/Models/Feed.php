@@ -29,6 +29,10 @@ class Feed extends Model
         'event_date'
     ];
 
+    protected $casts = [
+        'event_date' => 'datetime',
+    ];
+
     public function user() 
     {
         return $this->belongsTo(User::class);

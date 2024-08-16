@@ -17,10 +17,13 @@
         @endif
     </a>
     <ul class="dropdown-menu border-2 bg-light" aria-labelledby="dropdownMenuButton">
-        @forelse($notifications as $notification)
+        @forelse($notifications->take(7) as $notification)
             @include('components.notification-card')
         @empty
             <li class="dropdown-item text-primary">No notifications</li>
         @endforelse
+        <div class="d-flex align-center justify-content-center mt-3" style="border-top: 1px solid rgba(118, 118, 118, 1);">
+            <a class="pt-2" href="{{ route('notification.index')}}">View All</a>
+        </div>
     </ul>
 </div>

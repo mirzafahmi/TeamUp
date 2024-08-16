@@ -82,7 +82,7 @@
             <div class="row">
                 <div class="col mb-2">
                     <span class="d-block">Event Date</span>
-                    <span>{{ $feed->event_date  }}</span>
+                    <span>{{ $feed->event_date->format('M j, Y \a\t g:i A') }}</span>
                 </div>
                 
                 <div class="col mb-2">
@@ -107,7 +107,9 @@
                         data-bs-placement="bottom"
                         data-bs-content="View Details"
                     > 
-                        <a href="{{ route('event-locations.show', $feed->eventLocation->id) }}">{{$feed->eventLocation->name}}</a>
+                        <a href="{{ route('event-locations.show', $feed->eventLocation->id) }}">
+                            {{$feed->eventLocation->name}}
+                        </a>
                     </span>
                 </div>
             </div>
@@ -135,6 +137,7 @@
     </div>
     @if($showComment)
         <hr>
-        @include('comments.show')
+        @include('comments.show', ['comments' => $feed->comments])
     @endif
+    
 </div>

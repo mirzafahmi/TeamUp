@@ -63,6 +63,10 @@ class CommentResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')
+                    ->label('ID')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('feed_id')
                     ->numeric()
                     ->sortable(),
@@ -73,7 +77,7 @@ class CommentResource extends Resource
                     ->limit(40),
                 Tables\Columns\IconColumn::make('request_to_join')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('status')
+                Tables\Columns\TextColumn::make('joinStatus.name')
                     ->searchable(),
                 Tables\Columns\IconColumn::make('is_read')
                     ->boolean(),

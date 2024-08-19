@@ -16,12 +16,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('comments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignIdFor(Feed::class, 'feed_id')->constrained()->onDelete('cascade');
-            $table->foreignIdFor(User::class, 'user_id')->constrained()->onDelete('cascade');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('feed_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
             $table->text('content')->nullable();
             $table->boolean('request_to_join')->default(false);
-            $table->foreignIdFor(PlayRole::class, 'play_role_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignUuid('play_role_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignUuid('join_status_id')->constrained()->onDelete('cascade');
             $table->boolean('is_read')->default(false);
             $table->timestamps();

@@ -67,11 +67,16 @@ class FeedPlayRoleResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')
+                    ->label('ID')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('feed_id')
-                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('feed.sport.name')
+                    ->label('Sport Name')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('playRole.name')
-                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('spot_availability')
                     ->numeric()

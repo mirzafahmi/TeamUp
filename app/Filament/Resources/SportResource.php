@@ -47,11 +47,14 @@ class SportResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('category.name')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('id')
+                    ->label('ID')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
+                ->searchable(),
+                Tables\Columns\TextColumn::make('category.name')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('description')
                     ->searchable()
                     ->limit(30),

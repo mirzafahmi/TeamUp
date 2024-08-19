@@ -3,17 +3,18 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasUuids;
 
-    protected $with = [
-        
-    ];
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     protected $fillable = [
         'name',
@@ -29,6 +30,15 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public static function booted()
+    {
+        static::creating(function ($model) {
+            if (empty($model->id)) {
+                $model->id = (string) Str::uuid();
+            }
+        });
+    }
 
     protected function casts(): array
     {

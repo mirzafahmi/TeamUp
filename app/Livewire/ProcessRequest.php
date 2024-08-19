@@ -20,7 +20,7 @@ class ProcessRequest extends Component
     public function updateStatus($status)
     {
         $this->status = $status;
-
+        
         $validated = $this->validate([
             'status' => 'required|in:Approved,Rejected,Pending',
         ]);
@@ -29,7 +29,8 @@ class ProcessRequest extends Component
 
         $this->comment->join_status_id = $statusId[$validated['status']];
         $this->comment->save();
-
+        
+        
         if($validated['status'] != 'Pending') {
             $feedOwner = $this->comment->feed->user;
             $targetUser = $this->comment->user;
@@ -49,6 +50,8 @@ class ProcessRequest extends Component
                 'is_read' => false,
             ]);
         }    
+
+        $this->comment->refresh();
     }
 
     public function render()

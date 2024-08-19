@@ -17,13 +17,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('feeds', function (Blueprint $table) {
-            $table->id();
-            $table->foreignIdFor(Sport::class, 'sport_id')->constrained()->onDelete('cascade');
-            $table->foreignIdFor(PlayLevel::class, 'play_level_id')->constrained()->onDelete('cascade');
-            $table->foreignIdFor(PlayMode::class, 'play_mode_id')->constrained()->onDelete('cascade');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('sport_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('play_level_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('play_mode_id')->constrained()->onDelete('cascade');
             $table->text('content')->nullable();
             $table->foreignUuid('event_location_id')->constrained()->onDelete('cascade');
-            $table->foreignIdFor(User::class, 'user_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
             $table->dateTime('event_date');
             $table->timestamps();
         });

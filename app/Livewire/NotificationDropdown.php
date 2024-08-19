@@ -20,7 +20,7 @@ class NotificationDropdown extends Component
     {
         $userId = auth()->id();
         $username = auth()->user()->username;
-
+    
         $this->notifications = $notificationService->getNotifications($userId, $username);
         $this->unreadCount = $this->notifications->where('is_read', false)->count();
     }
@@ -28,11 +28,12 @@ class NotificationDropdown extends Component
     public function markAsRead($commentId)
     {
         $user = auth()->user();
-
         $comment = Comment::find($commentId);
-
+        
         if ($comment && $comment->user_id !== $user->id) {
             $comment->update(['is_read' => true]);
+            
+            $this->loadNotifications(app(NotificationService::class));
         }
     }
 

@@ -93,14 +93,15 @@ class FeedResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')
+                    ->label('ID')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('sport.name')
-                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('playLevel.name')
-                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('playMode.name')
-                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('content')
                     ->limit(40)

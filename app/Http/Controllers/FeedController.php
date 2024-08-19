@@ -10,6 +10,7 @@ use App\Services\BadgeService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class FeedController extends Controller
 {
@@ -75,8 +76,6 @@ class FeedController extends Controller
                          ->withInput();
         }
 
-        //dd(count($playRoleIds) === 1 && is_null($playRoleIds[0]));
-
         $validated['user_id'] = auth()->user()->id;
         $validated['event_date'] = Carbon::createFromFormat('Y-m-d\TH:i', $validated['event_date'])
             ->format('Y-m-d H:i:s');
@@ -127,16 +126,28 @@ class FeedController extends Controller
 
         $feed->update($validated);
 
-        $playRoleIds = $validated['play_role_id'];
-        $spotAvailabilities = $validated['spot_availability'];
+        $playRoleIds = $validated['play_role_id'] ?? [];
+        $spotAvailabilities = $validated['spot_availability'] ?? [];
+        
+        if (count($playRoleIds) === 1 && is_null($playRoleIds[0])) {
+            return back()->withErrors(['play_role_id' => 'Play Role ID cannot be null if provided.'])
+                         ->withInput();
+        }
+    
+        if (count($spotAvailabilities) === 1 && is_null($spotAvailabilities[0])) {
+            return back()->withErrors(['spot_availability' => 'Spot Availability cannot be null if provided.'])
+                         ->withInput();
+        }
 
         $pivotData = [];
         foreach ($playRoleIds as $index => $roleId) {
             if ($roleId !== null && isset($spotAvailabilities[$index]) && $spotAvailabilities[$index] !== null) {
-                $pivotData[$roleId] = ['spot_availability' => $spotAvailabilities[$index]];
+                $pivotData[$roleId] = [
+                    'id' => (string) Str::uuid(),
+                    'spot_availability' => $spotAvailabilities[$index]
+                ];
             }
         }
-
         $feed->playRoles()->sync($pivotData);
 
         return redirect()->route('feeds.show', $feed->id)

@@ -44,3 +44,4 @@
     <p class="text-center mt-3">No Comments Found.</p>
 @endforelse
 @include('comments.create')
+

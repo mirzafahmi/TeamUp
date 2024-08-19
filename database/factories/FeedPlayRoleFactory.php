@@ -17,7 +17,7 @@ class FeedPlayRoleFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            
         ];
     }
 }

@@ -14,9 +14,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('preferred_sports', function (Blueprint $table) {
-            $table->id();
-            $table->foreignIdFor(User::class, 'user_id')->constrained()->onDelete('cascade');
-            $table->foreignIdFor(Sport::class, 'sport_id')->constrained()->onDelete('cascade');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('sport_id')->constrained()->onDelete('cascade');
             $table->unique(['user_id', 'sport_id']);
             $table->timestamps();
         });

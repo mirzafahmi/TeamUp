@@ -13,11 +13,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sports', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('image')->nullable();
-            $table->foreignIdFor(Category::class, 'category_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('category_id')->constrained()->onDelete('cascade');
 
             $table->timestamps();
         });

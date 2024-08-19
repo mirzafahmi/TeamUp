@@ -19,7 +19,7 @@
                     alt="{{ $preferredSport->name }}"
                 >
                 <button type="button" class="btn btn-danger position-absolute top-0 end-0"
-                    wire:click="deletePreferredSport({{ $preferredSport->id }})"
+                    wire:click="deletePreferredSport('{{ $preferredSport->id }}')"
                     style="--bs-btn-padding-y: .001rem; --bs-btn-padding-x: .25rem; --bs-btn-font-size: .1rem;"
                 >
                     X

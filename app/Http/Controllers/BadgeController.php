@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Badge;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class BadgeController extends Controller
 {
@@ -13,7 +14,9 @@ class BadgeController extends Controller
         $badge = Badge::where("name", $badgeName)->first();
 
         if ($badge && !$user->badges->contains($badge->id)){
-            $user->badges()->attach($badge->id);
+            $user->badges()->attach([
+                $badge->id => ['id' => (string) Str::uuid()]
+            ]);
         }
     }
 

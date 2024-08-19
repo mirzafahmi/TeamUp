@@ -6,6 +6,7 @@ use App\Models\PreferredSport;
 use App\Models\Sport;
 use App\Models\User;
 use Livewire\Component;
+use Illuminate\Support\Str;
 
 class PreferredSportEdit extends Component
 {
@@ -24,9 +25,8 @@ class PreferredSportEdit extends Component
     public function updatedSportId($value)
     {
         if ($value) {
-            PreferredSport::create([
-                'user_id' => $this->user->id,
-                'sport_id' => $value,
+            $this->user->preferredSports()->attach([
+                $value => ['id' => (string) Str::uuid()]
             ]);
 
             $this->loadSports();
@@ -36,12 +36,8 @@ class PreferredSportEdit extends Component
 
     public function deletePreferredSport($preferredSportId)
     {
-        $preferredSport = PreferredSport::where('sport_id', $preferredSportId)
-                                    ->where('user_id', $this->user->id)
-                                    ->first();
-
-        $preferredSport->delete();
         
+        $this->user->preferredSports()->detach($preferredSportId);
         $this->loadSports();
     }
 

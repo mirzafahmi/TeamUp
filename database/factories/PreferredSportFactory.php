@@ -2,11 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\PreferredSport;
 use App\Models\Sport;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\QueryException;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\PreferredSport>

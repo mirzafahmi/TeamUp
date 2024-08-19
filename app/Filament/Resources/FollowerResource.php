@@ -49,6 +49,10 @@ class FollowerResource extends Resource
                 ->select('followers.*', 'user.name as user_name', 'follower.name as follower_name')
             )
             ->columns([
+                Tables\Columns\TextColumn::make('id')
+                    ->label('ID')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('User Name')
                     ->numeric()

@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="ms-auto">
-        @if($comment->joinStatus->name == 'Pending')
+        @if($status == 'Pending')
             <button wire:click="updateStatus('Approved')" class="btn btn-dark" title="Approved">
                 <i class="fa-solid fa-check"></i>
             </button>

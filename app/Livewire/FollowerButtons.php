@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Illuminate\Support\Str;
 
 class FollowerButtons extends Component
 {
@@ -25,9 +26,11 @@ class FollowerButtons extends Component
         if ($this->isFollowing) {
             $authUser->followings()->detach($userId);
             $this->isFollowing = false;
+            $this->dispatch('flashMessage', 'You have unfollowed ' . $this->user->name);
         } else {
-            $authUser->followings()->attach($userId);
+            $authUser->followings()->attach([$userId => ['id' => (string) Str::uuid()]]);
             $this->isFollowing = true;
+            $this->dispatch('flashMessage', 'You are now following ' . $this->user->name);
         }
     }
     public function render()

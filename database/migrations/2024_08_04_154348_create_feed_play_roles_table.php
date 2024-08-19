@@ -14,9 +14,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('feed_play_roles', function (Blueprint $table) {
-            $table->id();
-            $table->foreignIdFor(Feed::class)->constrained()->onDelete('cascade');
-            $table->foreignIdFor(PlayRole::class)->constrained()->onDelete('cascade');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('feed_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('play_role_id')->constrained()->onDelete('cascade');
             $table->integer('spot_availability');
             $table->timestamps();
         });

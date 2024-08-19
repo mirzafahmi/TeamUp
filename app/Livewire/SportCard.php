@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Sport;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Illuminate\Support\Str;
 
 class SportCard extends Component
 {
@@ -23,9 +24,11 @@ class SportCard extends Component
         if ($this->isLiked) {
             $authUser->preferredSports()->detach($sportId);
             $this->isLiked = false;
+            $this->dispatch('flashMessage', 'You unliked ' . $this->sport->name);
         } else {
-            $authUser->preferredSports()->attach($sportId);
+            $authUser->preferredSports()->attach([$sportId => ['id' => (string) Str::uuid()]]);
             $this->isLiked = true;
+            $this->dispatch('flashMessage', 'You liked ' . $this->sport->name);
         }
     }
 

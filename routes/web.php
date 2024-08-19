@@ -39,3 +39,25 @@ Route::resource('event-locations', EventLocationController::class)->only('show')
 
 Route::get('/search', [SearchController::class, 'show'])->name('search.results')->middleware('auth');
 Route::get('/notification', [NotificationController::class, 'index'])->name('notification.index')->middleware('auth');
+
+Route::get('/under-construction', function () {
+    return view('components.under-constructions');
+})->middleware('auth')->name('under-constructions');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/sports', function () {
+        return view('components.under-constructions');
+    })->middleware('auth')->name('sports.index');
+
+    Route::get('/community', function () {
+        return view('components.under-constructions');
+    })->middleware('auth')->name('community.index');
+
+    Route::get('/about', function () {
+        return view('components.under-constructions');
+    })->middleware('auth')->name('about.index');
+
+    Route::get('/terms', function () {
+        return view('components.under-constructions');
+    })->middleware('auth')->name('terms.index');
+});

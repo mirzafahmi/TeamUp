@@ -45,9 +45,13 @@ class PreferredSportResource extends Resource
         return $table
             ->query(PreferredSport::query()
                 ->leftJoin('sports', 'preferred_sports.sport_id', '=', 'sports.id')
-                ->leftJoin('users', 'preferred_sports.sport_id', '=', 'users.id')
+                ->leftJoin('users', 'preferred_sports.user_id', '=', 'users.id')
                 ->select('preferred_sports.*', 'sports.name as sport_name', 'users.name as user_name'))
             ->columns([
+                Tables\Columns\TextColumn::make('id')
+                    ->label('ID')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('user_name')
                     ->numeric()
                     ->sortable(),

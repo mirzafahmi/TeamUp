@@ -24,6 +24,7 @@
             
             <div class="container py-4">
                 @include('partial.message')
+                @livewire('flash-message')
                 @yield('content')
             </div>
 
@@ -32,6 +33,15 @@
         <script>
             const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
             const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+
+            document.addEventListener('DOMContentLoaded', function () {
+                setTimeout(() => {
+                    let alert = document.querySelector('.alert-success');
+                    if (alert) {
+                        alert.style.display = 'none';
+                    }
+                }, 3000);
+            });
         </script>
     </body>
 </html>

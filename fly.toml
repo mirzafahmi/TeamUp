@@ -13,7 +13,8 @@ console_command = 'php /var/www/html/artisan tinker'
     PHP_VERSION = '8.2'
 
 [env]
-  APP_ENV = 'production'
+  APP_ENV = 'development'
+  APP_DEBUG=true
   LOG_CHANNEL = 'stderr'
   LOG_LEVEL = 'info'
   LOG_STDERR_FORMATTER = 'Monolog\Formatter\JsonFormatter'
@@ -23,7 +24,6 @@ console_command = 'php /var/www/html/artisan tinker'
   DB_HOST='aws-0-ap-southeast-1.pooler.supabase.com'
   DB_PORT='6543'
   DB_DATABASE='postgres'
-  DB_SSL_MODE='require'
   
 
 [http_service]

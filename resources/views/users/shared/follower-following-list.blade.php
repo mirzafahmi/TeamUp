@@ -13,8 +13,8 @@
                         {{ $intendedUser->name }}
                     </a>
                 </h5>
-                <p class="mb-0 text-muted">&#64;{{ $intendedUser->username }}</p>
-                <p class="mb-0 text-muted">{{ $intendedUser->email }}</p>
+                <p class="mb-0 text-muted fs-6">&#64;{{ $intendedUser->username }}</p>
+                <p class="mb-0 text-muted fs-6">{{ $intendedUser->email }}</p>
             </div>
         </div>
         <div class="">

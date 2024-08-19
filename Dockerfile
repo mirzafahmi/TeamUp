@@ -58,6 +58,7 @@ WORKDIR /var/www/html
 
 # 4. Setup application dependencies 
 RUN composer install --optimize-autoloader --no-dev \
+    && composer remove ext-swoole || true \
     && mkdir -p storage/logs \
     && php artisan optimize:clear \
     && chown -R www-data:www-data /var/www/html \

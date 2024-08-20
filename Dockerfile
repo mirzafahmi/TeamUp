@@ -38,7 +38,7 @@ RUN apt-get update \
     && ln -sf /etc/alternatives/vim /usr/bin/vim \
     && echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu jammy main" > /etc/apt/sources.list.d/ondrej-ubuntu-php-focal.list \
     && apt-get update \
-    && apt-get -y --no-install-recommends install $(cat /tmp/php-packages.txt) \
+    && apt-get -y --no-install-recommends install $(cat /tmp/php-packages.txt | grep -v swoole) \
     && ln -sf /usr/sbin/php-fpm${PHP_VERSION} /usr/sbin/php-fpm \
     && mkdir -p /var/www/html/public && echo "index" > /var/www/html/public/index.php \
     && apt-get clean \
@@ -112,6 +112,12 @@ RUN if [ -f "vite.config.js" ]; then \
 # create our final image, adding in static
 # assets that we generated above
 FROM base
+
+RUN rm -f /var/www/html/public/storage
+
+RUN mkdir -p /var/www/html/storage \
+    && ln -sfn /var/www/html/storage/app/public /var/www/html/public/storage \
+    && chown -R www-data:www-data /var/www/html/storage /var/www/html/public/storage
 
 # Packages like Laravel Nova may have added assets to the public directory
 # or maybe some custom assets were added manually! Either way, we merge

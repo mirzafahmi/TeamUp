@@ -71,8 +71,5 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true,
-    "conflict": {
-        "ext-swoole": "*"
-    }
+    "prefer-stable": true
 }

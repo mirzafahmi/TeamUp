@@ -42,7 +42,7 @@ class UserResource extends Resource
                 Forms\Components\FileUpload::make('image')
                     ->image()
                     ->directory('profile'),
-                Forms\Components\TextArea::make('bio'),
+                Forms\Components\Textarea::make('bio'),
                 Forms\Components\Toggle::make('is_admin')
                     ->required(),
             ]);

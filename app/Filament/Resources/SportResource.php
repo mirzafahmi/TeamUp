@@ -28,7 +28,7 @@ class SportResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->label('Sport Name')
                     ->required(),
-                Forms\Components\TextArea::make('description')
+                Forms\Components\Textarea::make('description')
                     ->label('Sport Description'),
                 Forms\Components\FileUpload::make('image')
                     ->label('Sport Name')

@@ -39,7 +39,7 @@ class FeedResource extends Resource
                         ->searchable()
                         ->preload()
                         ->required(),
-                    Forms\Components\TextArea::make('content')
+                    Forms\Components\Textarea::make('content')
                         ->label('Feed Content'),
                 ]),
                 Forms\Components\Section::make('Sports Details')

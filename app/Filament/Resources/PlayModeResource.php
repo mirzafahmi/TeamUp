@@ -28,7 +28,7 @@ class PlayModeResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->label('Play Mode Name')
                     ->required(),
-                Forms\Components\TextArea::make('description')
+                Forms\Components\Textarea::make('description')
                     ->label('Play Mode Description'),
                 Forms\Components\Select::make('sport_id')
                     ->label('Sport Name')

@@ -43,7 +43,7 @@ class CommentResource extends Resource
                         ->preload()
                         ->required(),
                     ]),
-                    Forms\Components\TextArea::make('content')
+                    Forms\Components\Textarea::make('content')
                     ->label('Comment Content')
                     ->required(),
                     Forms\Components\Toggle::make('request_to_join')

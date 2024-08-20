@@ -13,13 +13,28 @@ console_command = 'php /var/www/html/artisan tinker'
     PHP_VERSION = '8.2'
 
 [env]
+  APP_NAME = "TeamUp"
   APP_ENV = 'development'
-  APP_DEBUG=true
+  APP_DEBUG=false
+  APP_TIMEZONE = "Asia/Singapore"
+
+  APP_LOCALE = "en"
+  APP_FALLBACK_LOCALE = "en"
+  APP_FAKER_LOCALE = "en_US"
+
+  APP_MAINTENANCE_DRIVER = "file"
+  CACHE_DRIVER = "file"
+
+  BCRYPT_ROUNDS = "12"
+
   LOG_CHANNEL = 'stderr'
   LOG_LEVEL = 'info'
   LOG_STDERR_FORMATTER = 'Monolog\Formatter\JsonFormatter'
+
+
   SESSION_DRIVER = 'cookie'
   SESSION_SECURE_COOKIE = 'true'
+  
   DB_CONNECTION='pgsql'
   DB_HOST='aws-0-ap-southeast-1.pooler.supabase.com'
   DB_PORT='6543'
@@ -37,6 +52,10 @@ console_command = 'php /var/www/html/artisan tinker'
 [mounts]
   source="storage_dir"
   destination="var/www/html/storage"
+  
+[deploy]
+release_command = "/populate_volume.sh"
+
 
 [[vm]]
   memory = '256mb'

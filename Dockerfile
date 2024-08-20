@@ -51,6 +51,12 @@ COPY .fly/supervisor/ /etc/supervisor/
 COPY .fly/entrypoint.sh /entrypoint
 COPY .fly/start-nginx.sh /usr/local/bin/start-nginx
 RUN chmod 754 /usr/local/bin/start-nginx
+
+RUN mkdir -p /tmp/storage_init
+COPY storage/app/public/ /tmp/storage_init
+
+COPY .fly/populate_volume.sh /populate_volume.sh
+RUN chmod +x /populate_volume.sh
     
 # 3. Copy application code, skipping files based on .dockerignore
 COPY . /var/www/html
@@ -113,9 +119,8 @@ RUN if [ -f "vite.config.js" ]; then \
 # assets that we generated above
 FROM base
 
-RUN rm -f /var/www/html/public/storage
-
-RUN mkdir -p /var/www/html/storage \
+RUN rm -rf /var/www/html/public/storage \
+    && mkdir -p /var/www/html/storage \
     && ln -sfn /var/www/html/storage/app/public /var/www/html/public/storage \
     && chown -R www-data:www-data /var/www/html/storage /var/www/html/public/storage
 

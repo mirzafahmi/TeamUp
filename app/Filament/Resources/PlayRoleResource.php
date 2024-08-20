@@ -34,7 +34,7 @@ class PlayRoleResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->label('Play Role Name')
                     ->required(),
-                Forms\Components\TextArea::make('description')
+                Forms\Components\Textarea::make('description')
                     ->label('Play Role Description')
                     ->required(),
             ]);

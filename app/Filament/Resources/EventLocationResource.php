@@ -28,7 +28,7 @@ class EventLocationResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->label('Event Location Name')
                     ->required(),
-                Forms\Components\TextArea::make('address')
+                Forms\Components\Textarea::make('address')
                     ->label('Event Location Address'),
                 Forms\Components\TextInput::make('map_link')
                     ->label('Event Location Map Link'),

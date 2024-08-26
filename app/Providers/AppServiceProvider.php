@@ -10,6 +10,7 @@ use App\Services\BadgeService;
 use Filament\Facades\Filament;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -53,6 +54,5 @@ class AppServiceProvider extends ServiceProvider
         });
         
         Paginator::useBootstrapFive();
-
     }
 }

@@ -17,6 +17,7 @@ console_command = 'php /var/www/html/artisan tinker'
   APP_ENV = 'development'
   APP_DEBUG=false
   APP_TIMEZONE = "Asia/Singapore"
+  APP_URL = "https://teamup.fly.dev"
 
   APP_LOCALE = "en"
   APP_FALLBACK_LOCALE = "en"

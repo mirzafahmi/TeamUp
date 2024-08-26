@@ -1,36 +1,29 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\CheckOwnerMiddleware;
+use App\Http\Middleware\TestMiddleware;
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\EventLocationController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SearchController;
 use App\Http\Middleware\CheckBadges;
-use App\Http\Middleware\CheckOwner;
 use App\Http\Middleware\DeviceDetection;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
-Route::get('/', [FeedController::class, 'index'])->name('index')->middleware([DeviceDetection::class, CheckBadges::class]);
-
-Route::group(['middleware' => 'guest'], function () {
-    Route::get('/register', [AuthController::class, 'register'])->name('register');
-    Route::post('/register', [AuthController::class, 'store']);
-
-    Route::get('/login', [AuthController::class, 'login'])->name('login');
-    Route::post('/login', [AuthController::class, 'authenticate']);
-});
-
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
+Route::get('/', [FeedController::class, 'index'])->name('index')->middleware(['auth', 'verified', DeviceDetection::class, CheckBadges::class]);
 
 Route::get('profile', [UserController::class, 'profile'])->middleware(['auth', CheckBadges::class])->name('profile');
 
-Route::resource('users', UserController::class)->only('edit', 'update')->middleware(['auth', CheckOwner::class]);    
+Route::resource('users', UserController::class)
+    ->only(['edit', 'update', 'destroy'])
+    ->middleware(['auth', CheckOwnerMiddleware::class]);    
 Route::resource('users', UserController::class)->only('show');
 
-Route::resource('feeds', FeedController::class)->middleware(['auth', CheckOwner::class]);
+Route::resource('feeds', FeedController::class)->middleware(['auth', CheckOwnerMiddleware::class]);
 Route::resource('feeds', FeedController::class)->only('show');
 
 Route::resource('comments', CommentController::class)->only('store', 'update', 'destroy')->middleware('auth');
@@ -61,3 +54,5 @@ Route::group(['middleware' => 'auth'], function () {
         return view('components.under-constructions');
     })->middleware('auth')->name('terms.index');
 });
+
+require __DIR__.'/auth.php';

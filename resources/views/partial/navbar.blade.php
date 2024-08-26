@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-lg bg-dark border-bottom border-bottom-dark ticky-top bg-body-tertiary"
     data-bs-theme="dark">
     <div class="container">
-        <a class="navbar-brand fw-light" href="{{ route('index') }}">
-            <span class="fa-solid fa-vr-cardboard me-2"></span>
-            TeamUp
+        <a class="navbar-brand fw-light d-flex align-items-center" href="{{ route('index') }}">
+            <x-application-logo class="tw-fill-current tw-text-white" size="26px" style="height: 100%;"/>
+            <span class="ms-2">TeamUp</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

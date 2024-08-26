@@ -1,4 +1,7 @@
-<li id="notificationItem" class="dropdown-item text-primary {{ !$notification->is_read ? 'unread' : '' }}">
+<li 
+    id="notificationItem" 
+    class="dropdown-item text-primary {{ !$notification->is_read ? 'unread' : '' }}"
+>
     <a href="{{ route('feeds.show', $notification->feed_id) }}" 
         wire:click="markAsRead('{{ $notification->id }}')" 
         class="text-decoration-none"   

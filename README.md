@@ -19,6 +19,7 @@
   <img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white" />
   <img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" />
   <img src="https://img.shields.io/badge/livewire-4e56a6?style=for-the-badge&logo=livewire&logoColor=white" />
+  <img src="https://img.shields.io/badge/Supabase-181818?style=for-the-badge&logo=supabase&logoColor=white" />
 </p>
 
 ## Table of Contents
@@ -65,10 +66,10 @@ Whether you're looking to join a new game, organize a sports event, or simply co
 3.  Install Dependencies
    <br>
 
-      ```
-         composer install
-         npm install
-      ```
+   ```
+      composer install
+      npm install
+   ```
    
 
 1. Copy the .env.example file to a new .env file and update the environment variables.
@@ -116,8 +117,12 @@ Whether you're looking to join a new game, organize a sports event, or simply co
 2. Make retweet or repost functionality
 3. Chat features
 4. Convert auth to laravel breeze
+5. Add Oauth with laravel passport
+6. Do unit and feature testing
+7. Decouple serve file into cdn/S3 bucket
 
 ## Bug Known
 
 1. Follower and preferred sport seed as it caused unique constraint error
 2. Sometimes, feeds able to be created even the roles are not included
+3. Issue with concurent login of same user cause pdo error

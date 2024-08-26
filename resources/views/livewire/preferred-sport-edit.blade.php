@@ -1,5 +1,5 @@
 <div class="col mt-4">
-    <h5 class="fs-5"> Preferred Sports: </h5>
+    <label for="sportSelect"> Preferred Sports: </label>
     <div class="form-floating mb-2">
         <select id="sportSelect" wire:model.live="sportId" name="sport_id" class="form-select" aria-label="Floating label select example">
             <option value="">Select Sports</option>

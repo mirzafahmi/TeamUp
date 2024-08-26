@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 :root {
     --primary-teamup: rgba(255, 255, 255, 0.55);
     --primary-shade-teamup: #FAF9F6;
@@ -35,4 +40,38 @@ li .dropdown-item:hover {
 
 .nav-item:has(> .feed-tab)  {
     margin-right: 0;
+}
+
+.custom-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem; /* tw-px-4 tw-py-2 */
+    background-color: goldenrod; /* Goldenrod background color */
+    border: none;
+    border-radius: 0.375rem; /* tw-rounded-md */
+    font-weight: 600; /* tw-font-semibold */
+    font-size: 0.75rem; /* tw-text-xs */
+    color: white;
+    text-transform: uppercase; /* tw-uppercase */
+    letter-spacing: 0.05em; /* tw-tracking-widest */
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+.custom-button:hover {
+    background-color: #daa520; /* Darken the Goldenrod color on hover */
+}
+
+.custom-button:active {
+    background-color: #b8860b; /* Even darker Goldenrod when active */
+}
+
+.custom-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(218, 165, 32, 0.5); /* Focus ring with Goldenrod tint */
+}
+
+.custom-button:disabled {
+    background-color: rgba(218, 165, 32, 0.5); /* Lighter Goldenrod when disabled */
+    cursor: not-allowed;
+    opacity: 0.65;
 }

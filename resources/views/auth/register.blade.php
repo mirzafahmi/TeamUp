@@ -2,7 +2,17 @@
 
 @section('title', 'Register')
 
+
 @section('content')
+
+    <div class="tw-text-center tw-mb-4">
+        <h1 class="tw-text-2xl tw-font-semibold tw-text-gray-800">Welcome To TeamUp!</h1>
+        <div class="tw-flex tw-items-center tw-my-4">
+            <div class="tw-flex-grow tw-border-t tw-border-gray-300"></div>
+            <span class="tw-px-4 tw-text-gray-500">Sign Up</span>
+            <div class="tw-flex-grow tw-border-t tw-border-gray-300"></div>
+        </div>
+    </div>
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -47,13 +57,32 @@
         </div>
 
         <div class="tw-flex tw-items-center tw-justify-end tw-mt-4">
-            <a class="tw-underline tw-text-sm tw-text-gray-600 dark:tw-text-gray-400 hover:tw-text-gray-900 dark:hover:tw-text-gray-900 tw-rounded-md focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-offset-2 focus:tw-ring-indigo-500 dark:focus:tw-ring-offset-gray-800 tw-me-2" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
             <x-primary-button class="tw-ms-4">
                 {{ __('Register') }}
             </x-primary-button>
+        </div>
+
+        <div class="tw-flex tw-items-center tw-my-4">
+            <div class="tw-flex-grow tw-border-t tw-border-gray-300"></div>
+            <span class="tw-px-4 tw-text-gray-500">or</span>
+            <div class="tw-flex-grow tw-border-t tw-border-gray-300"></div>
+        </div>
+
+        <div>
+            <x-provider-button provider="google" text="Sign up with Google" classes="tw-mb-4" />
+            <x-provider-button provider="github" text="Sign up with GitHub" classes="tw-mb-4" />
+        </div>
+
+        <div class="tw-flex tw-items-center tw-justify-center">
+            <span>
+                Have account ?
+            </span>
+            <a 
+                class="tw-ms-2 tw-underline tw-text-sm tw-text-gray-600 dark:tw-text-gray-400 hover:tw-text-gray-900 dark:hover:tw-text-gray-900 tw-rounded-md focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-offset-2 focus:tw-ring-indigo-500 dark:focus:tw-ring-offset-gray-800 tw-me-2" 
+                href="{{ route('login') }}"
+            >
+                Log in
+            </a>
         </div>
     </form>
 @endsection

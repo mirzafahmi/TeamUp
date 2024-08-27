@@ -9,6 +9,7 @@
         "filament/filament": "^3.2",
         "jenssegers/agent": "^2.6",
         "laravel/framework": "^11.9",
+        "laravel/socialite": "^5.15",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "nesbot/carbon": "^3.7"

@@ -49,6 +49,11 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
+    public function providers()
+    {
+        return $this->hasMany(UserProvider::class);
+    }
+
     public function feeds()
     {
         return $this->hasMany(Feed::class);
@@ -61,8 +66,13 @@ class User extends Authenticatable implements MustVerifyEmail
     
     public function getImageURL()
     {
-        if ($this->image)
-        {
+        if ($this->image) {
+            // Check if the $this->image is an absolute URL
+            if (filter_var($this->image, FILTER_VALIDATE_URL)) {
+                return $this->image;
+            }
+    
+            // Handle relative URLs
             return url('storage/' . $this->image);
         }
 

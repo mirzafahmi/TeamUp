@@ -17,11 +17,21 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('image')->nullable();
             $table->text('bio')->nullable();
             $table->boolean('is_admin')->default(false);
             $table->rememberToken();
+            $table->timestamps();
+        });
+
+        Schema::create('user_providers', function (Blueprint $table) {
+            $table->id();
+            $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
+            $table->string('provider'); // e.g., 'github', 'google'
+            $table->string('provider_id'); // e.g., OAuth ID from provider
+            $table->string('provider_token')->nullable(); // OAuth token
+            $table->string('provider_refresh_token')->nullable(); // OAuth refresh token, if available
             $table->timestamps();
         });
 

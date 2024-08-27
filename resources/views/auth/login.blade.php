@@ -6,6 +6,14 @@
 
 <x-auth-session-status class="tw-mb-4" :status="session('status')" />
 
+<div class="tw-text-center tw-mb-4">
+    <h1 class="tw-text-2xl tw-font-semibold tw-text-gray-800">Welcome Back!</h1>
+    <div class="tw-flex tw-items-center tw-my-4">
+        <div class="tw-flex-grow tw-border-t tw-border-gray-300"></div>
+        <span class="tw-px-4 tw-text-gray-500">Log-in</span>
+        <div class="tw-flex-grow tw-border-t tw-border-gray-300"></div>
+    </div>
+</div>
 <form method="POST" action="{{ route('login') }}">
     @csrf
 
@@ -34,16 +42,39 @@
         </label>
     </div>
 
-    <div class="tw-flex tw-items-center tw-justify-end tw-mt-4">
-        @if (Route::has('password.request'))
-            <a class="tw-underline tw-text-sm tw-text-gray-600 dark:tw-text-gray-400 hover:tw-text-gray-900 dark:hover:tw-text-gray-900 tw-rounded-md focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-offset-2 focus:tw-ring-indigo-500 dark:focus:tw-ring-offset-gray-800 tw-me-2" href="{{ route('password.request') }}">
-                {{ __('Forgot your password?') }}
-            </a>
-        @endif
-
+    <div class="tw-mt-4 tw-flex tw-flex-col tw-items-center tw-justify-center">
         <x-primary-button class="tw-ms-3">
             {{ __('Log in') }}
         </x-primary-button>
+
+        @if (Route::has('password.request'))
+            <a class="tw-underline tw-text-sm tw-text-gray-600 dark:tw-text-gray-400 hover:tw-text-gray-900 dark:hover:tw-text-gray-900 tw-rounded-md focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-offset-2 focus:tw-ring-indigo-500 dark:focus:tw-ring-offset-gray-800 tw-me-2 tw-mt-2" href="{{ route('password.request') }}">
+                {{ __('Forgot your password?') }}
+            </a>
+        @endif
+    </div>
+
+    <div class="tw-flex tw-items-center tw-my-4">
+        <div class="tw-flex-grow tw-border-t tw-border-gray-300"></div>
+        <span class="tw-px-4 tw-text-gray-500">or</span>
+        <div class="tw-flex-grow tw-border-t tw-border-gray-300"></div>
+    </div>
+
+    <div>
+        <x-provider-button provider="google" text="Continue with Google" classes="tw-mb-4" />
+        <x-provider-button provider="github" text="Continue with GitHub" classes="tw-mb-4" />
+    </div>
+
+    <div class="tw-flex tw-items-center tw-justify-center">
+        <span>
+            New to TeamUp ?
+        </span>
+        <a 
+            class="tw-ms-2 tw-underline tw-text-sm tw-text-gray-600 dark:tw-text-gray-400 hover:tw-text-gray-900 dark:hover:tw-text-gray-900 tw-rounded-md focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-offset-2 focus:tw-ring-indigo-500 dark:focus:tw-ring-offset-gray-800 tw-me-2" 
+            href="{{ route('register') }}"
+        >
+            Sign-up
+        </a>
     </div>
 </form>
 

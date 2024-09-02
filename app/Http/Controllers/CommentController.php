@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommentAdded;
 use App\Models\Comment;
 use App\Models\JoinStatus;
 use App\Services\BadgeService;
@@ -36,7 +37,9 @@ class CommentController extends Controller
             'is_read' => 'required'
         ]);
 
-        Comment::create($validated);
+        $comment = Comment::create($validated);
+
+        event(new CommentAdded($comment));
 
         $this->badgeService->checkAndAssignBadges($validated['user_id']);
 

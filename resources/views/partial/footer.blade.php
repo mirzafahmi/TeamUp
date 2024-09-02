@@ -1,4 +1,4 @@
-<footer class="bg-dark text-white py-3">
+<footer class="tw-bg-[#272A2D] text-white py-3">
     <div class="container d-flex align-items-center justify-content-center">
         <div class="text-center">
             <p class="mb-0 text-center fw-light d-flex align-items-center">

@@ -3,27 +3,42 @@
 namespace App\Services;
 
 use App\Models\Comment;
+use App\Models\Feed;
 
 class NotificationService
 {
-    public function getNotifications($userId, $username)
+    public function getUserNotificationsWithDetails($user)
     {
-        $mentionedComments = Comment::where('content', 'LIKE', "%@$username%")
-            ->with('joinStatus')
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $notifications = $user->notifications;
 
-        $ownFeedComments = Comment::whereHas('feed', function ($query) use ($userId) {
-            $query->where('user_id', $userId);
-        })
-            ->with('joinStatus')
-            ->orderBy('created_at', 'desc')
-            ->get();
+        // Extract IDs from JSON data
+        $commentIds = $notifications->pluck('data.comment_id')->unique()->filter()->toArray();
+        $feedIds = $notifications->pluck('data.feed_id')->unique()->filter()->toArray();
 
-        $combinedComments = $mentionedComments->merge($ownFeedComments);
+        // Retrieve related models with eager loading
+        $comments = Comment::whereIn('id', $commentIds)
+            ->with(['user:id,name,image,username', 'playRole', 'joinStatus'])
+            ->get()->keyBy('id');
 
-        return $combinedComments->filter(function ($comment) use ($userId) {
-            return $comment->user_id !== $userId;
-        })->unique('id')->sortByDesc('created_at');
+        $feeds = Feed::whereIn('id', $feedIds)
+            ->with(['user:id,name,image,username', 'sport', 'playMode', 'playLevel', 'playRoles', 'eventLocation'])
+            ->get()->keyBy('id');
+
+
+        // Map notifications with related models
+        return $notifications->map(function ($notification) use ($comments, $feeds) {
+            return [
+                'id' => $notification->id,
+                'message' => $notification->data['message'],
+                'comment' => $comments->get($notification->data['comment_id']),
+                'feed' => $feeds->get($notification->data['feed_id']),
+                'is_read' => $notification->read_at !== null,
+            ];
+        });
+    }
+
+    public function getUnreadCount($user)
+    {
+        return $user->unreadNotifications->count();
     }
 }

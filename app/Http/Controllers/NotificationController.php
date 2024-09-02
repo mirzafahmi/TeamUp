@@ -9,10 +9,9 @@ class NotificationController extends Controller
 {
     public function index(NotificationService $notificationService)
     {
-        $userId = auth()->id();
-        $username = auth()->user()->username;
+        $user = auth()->user();
 
-        $notifications = $notificationService->getNotifications($userId, $username);
+        $notifications = $notificationService->getUserNotificationsWithDetails($user);
 
         return view('notification.index', compact('notifications'));
     }

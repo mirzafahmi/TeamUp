@@ -5,7 +5,7 @@
 @section('middle-content')
 
 <div class="card text-center">
-    <div class="card-body">
+    <div class="card-body d-flex flex-column justify-content-center align-items-center">
         <svg
             xmlns:dc="http://purl.org/dc/elements/1.1/"
             xmlns:cc="http://creativecommons.org/ns#"
@@ -184,3 +184,4 @@
 </div>
 
 @endsection
+

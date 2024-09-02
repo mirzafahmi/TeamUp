@@ -16,7 +16,7 @@
             </span>
         @endif
     </a>
-    <ul class="dropdown-menu border-2 bg-light" aria-labelledby="dropdownMenuButton">
+    <ul class="dropdown-menu border-2 bg-light" style="min-width:300px;" aria-labelledby="dropdownMenuButton">
         @forelse($notifications->take(7) as $notification)
             @include('components.notification-card')
         @empty

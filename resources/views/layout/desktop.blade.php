@@ -16,7 +16,7 @@
             @include('partial.breadcrumbs')
 
             @auth
-                @if (request()->is('/'))
+                @if (request()->is('/') && $sports)
                     @include('partial.sport-suggestion')
                 @endif
             @endauth

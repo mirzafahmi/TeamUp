@@ -3,38 +3,39 @@
 namespace App\Livewire;
 
 use App\Models\Comment;
+use App\Models\Feed;
 use App\Services\NotificationService;
 use Livewire\Component;
 
 class NotificationDropdown extends Component
 {
-    public $notifications = [];
-    public $unreadCount = 0;
+    public $notifications;
+    public $unreadCount;
+    public $isDropdown = true;
+
+    protected $notificationService;
 
     public function mount(NotificationService $notificationService)
     {
-        $this->loadNotifications($notificationService);
+        $this->notificationService = $notificationService;
+        $this->refreshNotifications();
     }
 
-    public function loadNotifications(NotificationService $notificationService)
+    public function markAsRead($notificationId)
     {
-        $userId = auth()->id();
-        $username = auth()->user()->username;
-    
-        $this->notifications = $notificationService->getNotifications($userId, $username);
-        $this->unreadCount = $this->notifications->where('is_read', false)->count();
+        $notification = auth()->user()->notifications()->find($notificationId);
+
+        if ($notification) {
+            $notification->markAsRead();
+            $this->refreshNotifications();
+        }
     }
 
-    public function markAsRead($commentId)
+    public function refreshNotifications()
     {
         $user = auth()->user();
-        $comment = Comment::find($commentId);
-        
-        if ($comment && $comment->user_id !== $user->id) {
-            $comment->update(['is_read' => true]);
-            
-            $this->loadNotifications(app(NotificationService::class));
-        }
+        $this->notifications = $this->notificationService->getUserNotificationsWithDetails($user);
+        $this->unreadCount = $this->notificationService->getUnreadCount($user);
     }
 
     public function render()

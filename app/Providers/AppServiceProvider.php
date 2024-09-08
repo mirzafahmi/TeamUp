@@ -12,6 +12,8 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Http\Request;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,6 +32,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
+
+        Request::setTrustedProxies(['0.0.0.0/0'], Request::HEADER_X_FORWARDED_AWS_ELB);
+
         Filament::registerNavigationGroups([
             'Feed Settings',
             'Play Settings',

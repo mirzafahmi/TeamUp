@@ -1,4 +1,4 @@
-<div class="me-5" style="min-width: @if(session('is_mobile')) 100px @else 400px @endif">
+<div class="me-5">
     <form action="{{ route('search.results')}}" method="GET" class="d-flex me-auto">
         <input 
             type="text" 
@@ -13,8 +13,8 @@
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
     </form>  
-    @if ($searchTerm != ''  && !empty($results))
-        <div class="dropdown-menu show bg-light">
+    @if ($searchTerm != '' && $isFocused && !empty($results))
+        <div class="dropdown-menu show bg-light" style="min-width: @if(session('is_mobile')) 100px @else 500px @endif">
             <div class="dropdown-header shadow-sm">Feeds has keyword "{{$searchTerm}}"</div>
             <ul class="list-unstyled">
                 @forelse($results['feeds'] as $feed)

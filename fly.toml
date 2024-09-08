@@ -14,10 +14,12 @@ console_command = 'php /var/www/html/artisan tinker'
 
 [env]
   APP_NAME = "TeamUp"
-  APP_ENV = 'development'
-  APP_DEBUG=false
+  APP_ENV = 'production'
+  APP_DEBUG=true
   APP_TIMEZONE = "Asia/Singapore"
   APP_URL = "https://teamup.fly.dev"
+  ASSET_URL="https://teamup.fly.dev"
+
 
   APP_LOCALE = "en"
   APP_FALLBACK_LOCALE = "en"
@@ -26,12 +28,15 @@ console_command = 'php /var/www/html/artisan tinker'
   APP_MAINTENANCE_DRIVER = "file"
   CACHE_DRIVER = "file"
 
-  BCRYPT_ROUNDS = "12"
+  BCRYPT_ROUNDS = 12
 
-  LOG_CHANNEL = 'stderr'
-  LOG_LEVEL = 'info'
-  LOG_STDERR_FORMATTER = 'Monolog\Formatter\JsonFormatter'
+  LOG_CHANNEL="stack"
+  LOG_STACK="single"
+  LOG_DEPRECATIONS_CHANNEL="null"
+  LOG_LEVEL="debug"
 
+  GITHUB_REDIRECT_URL="/login/github/callback"
+  GOOGLE_REDIRECT_URL="/login/google/callback"
 
   SESSION_DRIVER = 'cookie'
   SESSION_SECURE_COOKIE = 'true'
@@ -40,6 +45,18 @@ console_command = 'php /var/www/html/artisan tinker'
   DB_HOST='aws-0-ap-southeast-1.pooler.supabase.com'
   DB_PORT='6543'
   DB_DATABASE='postgres'
+
+  BROADCAST_CONNECTION="log"
+  FILESYSTEM_DISK="local"
+  QUEUE_CONNECTION="database"
+
+  MAIL_MAILER="smtp"
+  MAIL_HOST="smtp.gmail.com"
+  MAIL_PORT=465
+  MAIL_USERNAME="teamup.4dmin@gmail.com"
+  MAIL_ENCRYPTION="tls"
+  MAIL_FROM_ADDRESS="teamup.4dmin@gmail.com"
+  MAIL_FROM_NAME="TeamUp"
   
 
 [http_service]
@@ -59,6 +76,6 @@ release_command = "/populate_volume.sh"
 
 
 [[vm]]
-  memory = '256mb'
+  memory = '512mb'
   cpu_kind = 'shared'
   cpus = 1

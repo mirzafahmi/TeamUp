@@ -6,7 +6,7 @@
     id="notificationItem" 
     class="dropdown-item {{ $isDropdown && !$notification['is_read'] ? 'unread' : '' }}"
 >
-    <a href="{{ route('feeds.show', $notification['feed']->id) }}" 
+    <a href="{{ route('feeds.show', $notification['comment']->feed->id) }}" 
         wire:click="markAsRead('{{ $notification['id'] }}')" 
         class="text-decoration-none"   
     >

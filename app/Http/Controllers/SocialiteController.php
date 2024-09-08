@@ -59,8 +59,6 @@ class SocialiteController extends Controller
                     'password' => null, // No password for OAuth users
                     'image' => $socialUser->getAvatar() ?? null,
                 ]);
-
-                $message = 'Account created successfully!';
             }
 
             // Link the provider to the user
@@ -70,6 +68,8 @@ class SocialiteController extends Controller
                 'provider_token' => $socialUser->token,
                 'provider_refresh_token' => $socialUser->refreshToken ?? null,
             ]);
+            
+            $message = 'Account linked successfully!';
 
             event(new Registered($user));
         }
